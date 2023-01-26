@@ -107,12 +107,12 @@ export const getStaticProps = async ({ params }: Params) => {
   const stats = readingTime(content)
 
   const serializedContent = await serialize(markdown, {
-    format: 'mdx',
     parseFrontmatter: true,
-    scope: '', // we can supply variables to the mdx files via scope
+    scope: {}, // we can supply variables to the mdx files via scope
     mdxOptions: {
       remarkPlugins: [],
-      rehypePlugins: []
+      rehypePlugins: [],
+      format: 'mdx',
     }
   })
 
