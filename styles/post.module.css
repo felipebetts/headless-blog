@@ -1,0 +1,28 @@
+.postContent  p {
+ font-size: 1.125rem;
+ line-height: 1.75rem;
+ margin-top: 1.5rem;
+ margin-bottom: 1.5rem;
+}
+
+.postContent h2 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 500;
+    padding: 1rem 0;
+    margin-top: 2.5rem;
+}
+
+.postContent image {
+    width: 100%;
+}
+
+.postContent span > p {
+    width: 100%;
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
+    font-size: 0.75rem/* 12px */;
+    line-height: 1rem/* 16px */;
+    text-align: center;
+    margin: 0.25rem 0;
+}

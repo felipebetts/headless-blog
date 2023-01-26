@@ -1,3 +1,4 @@
+import Head from '@/components/layout/head'
 import HeroImage from '@/components/post/hero-image'
 import ImageLabel from '@/components/post/image-label'
 import Paragraph from '@/components/post/paragraph'
@@ -7,7 +8,11 @@ import React from 'react'
 const PostPage = () => {
     return (
         <>
-          <HeroImage />
+          <Head
+            title='ChatGPT é aprovada em exames de MBA, médicos e advogados nos EUA'
+            description='A ChatGPT passou em testes importantes nos EUA e se fosse uma pessoa de verdade, estaria pronta para ser uma boa gestora, médica ou advogada'
+          />
+          <HeroImage  />
           <main className="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
             <article className="w-full">
               <h1 className='text-3xl sm:text-5xl font-semibold py-6 border-b'>
