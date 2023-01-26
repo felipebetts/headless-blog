@@ -25,24 +25,26 @@ const Home: React.FC<StaticProps> = ({ posts }) => {
         title="Blog de tecnologia"
         description='O seu blog com informacoes e noticias quentinhas de tecnologia.'
       />
-      <div className="h-64">
-        <h1 className="text-3xl font-bold underline">
-          Hello world!
-        </h1>
-        <Button>
-          button
-        </Button>
-        <Link href="/dummy_post">
-          link for dummy post
-        </Link>
-      </div>
-      <ul>
-        {posts && posts.map(post => (
-          <Link href={`/posts/${post.slug}`} key={post.slug}>
-            {post.frontmatter.title}
+      <main className='mx-auto max-w-6xl px-2 sm:px-6 lg:px-8'>
+        <div className="h-64">
+          <h1 className="text-3xl font-bold underline">
+            Hello world!
+          </h1>
+          <Button>
+            button
+          </Button>
+          <Link href="/dummy_post">
+            link for dummy post
           </Link>
-        ))}
-      </ul>
+        </div>
+        <ul>
+          {posts && posts.map(post => (
+            <Link href={`/posts/${post.slug}`} key={post.slug}>
+              {post.frontmatter.title}
+            </Link>
+          ))}
+        </ul>
+      </main>
     </>
   )
 }
