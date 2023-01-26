@@ -37,7 +37,7 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead }) => {
       <main className={`mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 ${styles.postContent}`}>
         <article className="w-full">
           <div className="w-full flex items-center py-2 mt-6 text-sm">
-            {frontmatter?.tags && frontmatter.tags.map(tag => (
+            {frontmatter?.tags && frontmatter.tags.map((tag: string) => (
               <Link href={`/categorias/${tag}`} key={tag}>
                 {tag}
               </Link>
@@ -91,15 +91,20 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async ({ params }) => {
+interface Slug {
+  slug: string
+}
+
+interface Params {
+  params: Slug
+}
+
+export const getStaticProps = async ({ params }: Params) => {
   const markdown = fs.readFileSync(path.join('posts', params.slug + '.mdx'), 'utf-8')
   const matter = require('gray-matter')
   const { content } = matter(markdown)
   const readingTime = require('reading-time')
   const stats = readingTime(content)
-  console.log(content)
-  console.log('stats:', stats)
-
 
   const serializedContent = await serialize(markdown, {
     format: 'mdx',
