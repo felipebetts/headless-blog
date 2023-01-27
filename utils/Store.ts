@@ -9,7 +9,7 @@ interface PostData {
 }
 
 interface StoreState {
-    posts: Array<PostData> | null
+    posts: PostData[] | null
 }
 
 const initialState: StoreState = {
@@ -21,24 +21,24 @@ interface StoreAction {
     payload: any
 }
 
-const reducer = (state: StoreState, action: StoreAction) => {
-    switch (action.type) {
-        case '':
+// const reducer = (state: StoreState, action: StoreAction) => {
+//     switch (action.type) {
+//         case '':
 
-            break;
+//             break;
 
-        default:
-            return state
-    }
+//         default:
+//             return state
+//     }
+// }
+
+
+
+export const Store = createContext<StoreState>(initialState)
+
+const StoreProvider = () => {
+    return
 }
-
-
-
-interface ProviderProps {
-    children: React.ReactNode
-}
-
-export const Store = createContext<StoreState | null>(null)
 
 // const StoreProvider: React.FC<ProviderProps> = ({ children }) => {
 //     const [state, dispatch] = useReducer(reducer, initialState)
