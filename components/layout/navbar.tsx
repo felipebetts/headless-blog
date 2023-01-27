@@ -5,10 +5,10 @@ import Link from 'next/link'
 import classNames from '@/utils/classnames'
 
 const navigation = [
-    { name: 'Dashboard', href: '#dashboard', current: true },
-    { name: 'Team', href: '#team', current: false },
-    { name: 'Projects', href: '#projects', current: false },
-    { name: 'Calendar', href: '#', current: false },
+    // { name: 'Dashboard', href: '#dashboard', current: true },
+    // { name: 'Team', href: '#team', current: false },
+    // { name: 'Projects', href: '#projects', current: false },
+    { name: 'Dummy post', href: '/dummy_post', current: false },
 ]
 
 const Navbar: React.FC = () => {
@@ -31,18 +31,18 @@ const Navbar: React.FC = () => {
               </div>
               <div className="flex flex-1 h-16 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <Link href='/'>
-                      <img
-                        className="block h-8 w-auto lg:hidden"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                        alt="Your Company"
+                <Link href='/'>
+                    <img
+                      className="block h-8 w-auto lg:hidden"
+                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      alt="Your Company"
+                    />
+                    <img
+                      className="hidden h-8 w-auto lg:block"
+                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      alt="Your Company"
                       />
-                      <img
-                        className="hidden h-8 w-auto lg:block"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                        alt="Your Company"
-                        />
-                  </Link>
+                </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4 my-auto">
