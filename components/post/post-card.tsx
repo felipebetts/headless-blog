@@ -22,10 +22,10 @@ const PostCard: React.FC<Props> = ({
   return (
     <div className="w-full h-full">
         <NextLink href={`/posts/${slug}`}>
-            {/* <div
-                className={`bg-[url('https://www.showmetech.com.br/wp-content/uploads//2023/01/destacada-chat-gpt-passa-em-mba-showmetech-1920x1024.png')] bg-cover bg-center h-72`}
-            /> */}
-            <img src={thumbnailUrl} alt={slug} className='h-48 w-full' />
+            <div
+                style={{ backgroundImage: `url('${thumbnailUrl}')`}}
+                className={`bg-cover bg-center h-72`}
+            />
         </NextLink>
         {tags && (
             <div className="flex items-center w-full">

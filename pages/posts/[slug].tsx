@@ -25,15 +25,13 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead }) => {
 
   const { frontmatter } = content
 
-  const router = useRouter()
-
   return (
     <>
       <Head
         title={frontmatter.title}
         description={frontmatter.description}
       />
-      <HeroImage  />
+      <HeroImage src={frontmatter.thumbnailUrl}  />
       <main className={`mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 ${styles.postContent}`}>
         <div className="w-full flex flex-col lg:flex-row">
           <article className="w-full flex-1 lg:pr-4 pb-6">
@@ -106,6 +104,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { content } = matter(markdown)
   const readingTime = require('reading-time')
   const stats = readingTime(content)
+  const minutesToRead = Math.ceil(stats.minutes)
 
   const serializedContent = await serialize(markdown, {
     parseFrontmatter: true,
@@ -122,7 +121,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       slug: params?.slug,
       content: serializedContent,
-      minutesToRead: Math.ceil(stats.minutes)
+      minutesToRead
     }
   }
 }
