@@ -38,14 +38,14 @@ interface ProviderProps {
     children: React.ReactNode
 }
 
-const Store = createContext<StoreState | null>(null)
+export const Store = createContext<StoreState | null>(null)
 
-const StoreProvider: React.FC<ProviderProps> = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, initialState)
-    const value = { state, dispatch }
-    return (
-        <Store.Provider value= { value } >
-        { children }
-        < /Store.Provider>
-    )
-}
+// const StoreProvider: React.FC<ProviderProps> = ({ children }) => {
+//     const [state, dispatch] = useReducer(reducer, initialState)
+//     const value = { state, dispatch }
+//     return (
+//         <Store.Provider value= { value } >
+//         { children }
+//         < /Store.Provider>
+//     )
+// }
