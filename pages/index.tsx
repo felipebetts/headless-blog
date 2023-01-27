@@ -1,6 +1,7 @@
 import Button from '@/components/common/button/button'
 import Link from '@/components/common/link'
 import Head from '@/components/layout/head'
+import PostCard from '@/components/post/post-card'
 
 interface FrontMatterParams {
   title: string
@@ -25,25 +26,27 @@ const Home: React.FC<StaticProps> = ({ posts }) => {
         title="Blog de tecnologia"
         description='O seu blog com informacoes e noticias quentinhas de tecnologia.'
       />
-      <main className='mx-auto max-w-6xl px-2 sm:px-6 lg:px-8'>
-        <div className="h-64">
-          <h1 className="text-3xl font-bold underline">
-            Hello world!
-          </h1>
-          <Button>
-            button
-          </Button>
-          <Link href="/dummy_post">
-            link for dummy post
-          </Link>
-        </div>
-        <ul>
+      <main className='mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 py-2 sm:py-4'>
+        {/* <ul>
           {posts && posts.map(post => (
             <Link href={`/posts/${post.slug}`} key={post.slug}>
               {post.frontmatter.title}
             </Link>
           ))}
-        </ul>
+        </ul> */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        {posts && posts.map(post => (
+          <div key={post.slug} className='w-full'>
+            <PostCard
+              date={post.frontmatter.date}
+              slug={post.slug}
+              tags={post.frontmatter.tags}
+              title={post.frontmatter.title}
+              thumbnailUrl={post.frontmatter.thumbnailUrl}
+            />
+          </div>
+          ))}
+        </div>
       </main>
     </>
   )
