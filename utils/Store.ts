@@ -40,7 +40,7 @@ interface ProviderProps {
 
 const Store = createContext<StoreState | null>(null)
 
-const StoreProvider = ({ children }) => {
+const StoreProvider: React.FC<ProviderProps> = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState)
     const value = { state, dispatch }
     return (
