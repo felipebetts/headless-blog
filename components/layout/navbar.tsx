@@ -5,10 +5,10 @@ import Link from 'next/link'
 import classNames from '@/utils/classnames'
 
 const navigation = [
-    { name: 'Dashboard', href: '#dashboard', current: true },
-    { name: 'Team', href: '#team', current: false },
-    { name: 'Projects', href: '#projects', current: false },
-    { name: 'Calendar', href: '#', current: false },
+    // { name: 'Dashboard', href: '#dashboard', current: true },
+    // { name: 'Team', href: '#team', current: false },
+    // { name: 'Projects', href: '#projects', current: false },
+    { name: 'Dummy post', href: '/dummy_post', current: false },
 ]
 
 const Navbar: React.FC = () => {

@@ -47,6 +47,7 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
               tags={post.frontmatter.tags}
               title={post.frontmatter.title}
               thumbnailUrl={post.frontmatter.thumbnailUrl}
+              minutesToRead={post.minutesToRead}
             />
           </div>
           ))}
