@@ -12,6 +12,7 @@ import LabeledImage from '@/components/post/labeled-image'
 import Link from '@/components/common/link'
 import YoutubePlayer from '@/components/libs/youtube-player'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { AdSenseScript, AdSenseUnit } from '@/components/libs/google-ad-unit'
 
 interface Props {
   slug: string
@@ -30,7 +31,9 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead }) => {
       <Head
         title={frontmatter.title}
         description={frontmatter.description}
-      />
+      >
+        <AdSenseScript />
+      </Head>
       <HeroImage src={frontmatter.thumbnailUrl}  />
       <main className={`mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 ${styles.postContent}`}>
         <div className="w-full flex flex-col lg:flex-row">
@@ -71,8 +74,9 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead }) => {
             <MDXRemote {...content} components={components} />
           </article>
           <aside className='lg:shrink-0 w-full lg:w-64 p-2 relative'>
-            <div className="w-full h-full max-h-[90vh] min-h-[240px] bg-slate-500 rounded-md sticky top-20 z-0 text-white text-4xl text-center">
+            <div className="w-full h-full max-h-[90vh] min-h-[240px] rounded-md sticky top-20 z-0 text-white text-4xl text-center">
               AD
+            <AdSenseUnit />
             </div>
           </aside>
         </div>

@@ -38,7 +38,7 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
         <AnimatedPostHero post={posts[2]} />
       </div>
       <main className='mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 py-2 sm:py-4'>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 my-10">
         {posts && posts.map(post => (
           <div key={post.slug} className='w-full'>
             <PostCard
@@ -52,6 +52,45 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
           </div>
           ))}
         </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 my-10">
+          {posts && posts.map(post => (
+            <div key={post.slug} className='w-full'>
+              <PostCard
+                date={post.frontmatter.date}
+                slug={post.slug}
+                tags={post.frontmatter.tags}
+                title={post.frontmatter.title}
+                thumbnailUrl={post.frontmatter.thumbnailUrl}
+                minutesToRead={post.minutesToRead}
+              />
+            </div>
+            ))}
+        </div>
+
+        <div className="my-10 w-full h-48 rounded-md bg-slate-500 text-white text-xl text-center">
+          AD
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 my-10">
+          {posts && posts.map(post => (
+            <div key={post.slug} className='w-full'>
+              <PostCard
+                date={post.frontmatter.date}
+                slug={post.slug}
+                tags={post.frontmatter.tags}
+                title={post.frontmatter.title}
+                thumbnailUrl={post.frontmatter.thumbnailUrl}
+                minutesToRead={post.minutesToRead}
+              />
+            </div>
+            ))}
+        </div>
+
+        <div className="my-10 w-full h-48 rounded-md bg-slate-500 text-white text-xl text-center">
+          AD
+        </div>
+
       </main>
     </>
   )
