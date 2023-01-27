@@ -2,6 +2,7 @@ import Button from '@/components/common/button/button'
 import Link from '@/components/common/link'
 import Head from '@/components/layout/head'
 import PostCard from '@/components/post/post-card'
+import { GetStaticProps } from 'next'
 
 interface FrontMatterParams {
   title: string
@@ -17,9 +18,10 @@ interface PostParams {
 }
 interface StaticProps {
   posts?: Array<PostParams>
+  tags?: Array<string>
 }
 
-const Home: React.FC<StaticProps> = ({ posts }) => {
+const Home: React.FC<StaticProps> = ({ posts, tags }) => {
   return (
     <>
       <Head 
@@ -54,27 +56,36 @@ const Home: React.FC<StaticProps> = ({ posts }) => {
 
 export default Home
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
     const fs = require('fs')
     const path = require('path')
     const matter = require('gray-matter')
 
     const files = fs.readdirSync(path.join('posts'))
 
+    const tags: Array<string> = []
     const posts = files.map((filename: string, i: number) => {
       const markdownWithMeta = fs.readFileSync(path.join('posts', filename))
       const { data } = matter(markdownWithMeta)
+      
+      data?.tags.forEach((el: string) => {
+        if (!tags.includes(el)) {
+          tags.push(el) 
+        }
+      })
       
       return {
         frontmatter: data,
         slug: filename.split('.')[0]
       }
     })
-    console.log('posts:', posts)
+    console.log('tags:', tags)
+    // console.log('posts:', posts)
 
     return {
       props: {
-        posts
+        posts,
+        tags
       }
     }
 }

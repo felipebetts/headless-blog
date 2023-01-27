@@ -43,7 +43,7 @@ const PostCard: React.FC<Props> = ({
             </div>
         )}
         <NextLink href={`/posts/${slug}`}>
-            <h4 className='text-lg hover:text-indigo-700 transition-all duration-150'>
+            <h4 className='text-lg hover:text-indigo-700 transition-all duration-150 font-medium'>
                 {title}
             </h4>
         </NextLink>

@@ -10,6 +10,8 @@ import HeroImage from '@/components/post/hero-image'
 import styles from '@/styles/post.module.css'
 import LabeledImage from '@/components/post/labeled-image'
 import Link from '@/components/common/link'
+import YoutubePlayer from '@/components/libs/youtube-player'
+import { GetStaticPaths, GetStaticProps } from 'next'
 
 interface Props {
   slug: string
@@ -17,7 +19,7 @@ interface Props {
   minutesToRead: number
 }
 
-const components = { SyntaxHighlighter, LabeledImage }
+const components = { SyntaxHighlighter, LabeledImage, YoutubePlayer }
 
 const Post: React.FC<Props> = ({ slug, content, minutesToRead }) => {
 
@@ -34,7 +36,7 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead }) => {
       <HeroImage  />
       <main className={`mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 ${styles.postContent}`}>
         <div className="w-full flex flex-col lg:flex-row">
-          <article className="w-full flex-1 lg:pr-4">
+          <article className="w-full flex-1 lg:pr-4 pb-6">
             <div className="w-full flex items-center py-2 mt-6 text-sm">
               {frontmatter?.tags && frontmatter.tags.map((tag: string) => (
                 <Link href={`/categorias/${tag}`} key={tag}>
@@ -44,8 +46,8 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead }) => {
               <span className='pr-2'> • </span>
               {minutesToRead && (
                 <div className="flex items-center text-gray-500">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 h-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <span className='ml-1'>
                     {minutesToRead} minuto{minutesToRead > 1 ? 's' : ''} de leitura
@@ -83,7 +85,7 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead }) => {
 
 export default Post
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const files = fs.readdirSync(path.join('posts'))
   const paths = files.map((filename) => ({
     params: {
@@ -97,16 +99,9 @@ export const getStaticPaths = async () => {
   }
 }
 
-interface Slug {
-  slug: string
-}
 
-interface Params {
-  params: Slug
-}
-
-export const getStaticProps = async ({ params }: Params) => {
-  const markdown = fs.readFileSync(path.join('posts', params.slug + '.mdx'), 'utf-8')
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const markdown = fs.readFileSync(path.join('posts', params?.slug + '.mdx'), 'utf-8')
   const matter = require('gray-matter')
   const { content } = matter(markdown)
   const readingTime = require('reading-time')
@@ -125,7 +120,7 @@ export const getStaticProps = async ({ params }: Params) => {
 
   return {
     props: {
-      slug: params.slug,
+      slug: params?.slug,
       content: serializedContent,
       minutesToRead: Math.ceil(stats.minutes)
     }

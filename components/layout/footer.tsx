@@ -11,7 +11,7 @@ const navigation = [
 const Footer = () => {
   return (
     <footer
-        className='min-w-screen bg-indigo-700 text-white h-64 py-4'
+        className='min-w-screen bg-slate-500 text-white h-64 py-4'
     >
       <div className="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 text-xl font-medium">
         {navigation.map(el => (
