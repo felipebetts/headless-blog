@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
 const getWindowDimensions = () => {
-    const { innerWidth: width, innerHeight: height } = window
+    // const { innerWidth: width, innerHeight: height } = window
+    const width = typeof window !== "undefined" ? window?.innerWidth : 1200
+    const height = typeof window !== "undefined" ? window?.innerHeight : 1200
     return {
         width,
         height
