@@ -7,6 +7,7 @@ import type { AppProps } from 'next/app'
 
 import 'nprogress/nprogress.css'
 import { AdSenseScript } from '@/components/libs/google-ad-unit'
+import ScrollObserver from '@/utils/scroll-observer'
 
 
 Router.events.on('routeChangeStart', () => NProgress.start())
@@ -19,9 +20,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       {/* <AdSenseScript /> */}
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ScrollObserver>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ScrollObserver>
     </>
   )
 }

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect } from 'react'
 import fs from 'fs'
 import path from 'path'
 import { serialize } from 'next-mdx-remote/serialize'
@@ -12,7 +12,7 @@ import LabeledImage from '@/components/post/labeled-image'
 import Link from '@/components/common/link'
 import YoutubePlayer from '@/components/libs/youtube-player'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { AdSenseScript, AdSenseUnit } from '@/components/libs/google-ad-unit'
+import { AdSenseScript, AdSenseUnit, AdSenseUnitScript } from '@/components/libs/google-ad-unit'
 
 interface Props {
   slug: string
@@ -32,7 +32,7 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead }) => {
         title={frontmatter.title}
         description={frontmatter.description}
       >
-        <AdSenseScript />
+        <AdSenseUnitScript />
       </Head>
       <HeroImage src={frontmatter.thumbnailUrl}  />
       <main className={`mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 ${styles.postContent}`}>

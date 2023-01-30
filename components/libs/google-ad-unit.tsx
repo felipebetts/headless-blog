@@ -23,8 +23,25 @@ export const AdSenseUnit: React.FC = () => (
             data-ad-slot="8558872051"
             data-ad-format="auto"
             data-full-width-responsive="true"></ins>
-        <script>
+        {/* <script>
             {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+        </script> */}
+    </>
+)
+
+// <Script
+//     id='AdUnitScript'
+//     dangerouslySetInnerHTML={{__html: `
+//         (adsbygoogle = window.adsbygoogle || []).push({
+//             google_ad_client: "ca-pub-your-client-id",
+//             enable_page_level_ads: true
+//         });
+//     `}}
+// />
+export const AdSenseUnitScript: React.FC = () => (
+    <>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </>
 )

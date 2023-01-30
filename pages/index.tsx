@@ -1,5 +1,3 @@
-import Button from '@/components/common/button/button'
-import Link from '@/components/common/link'
 import AnimatedPostHero from '@/components/home/AnimatedPostHero'
 import Head from '@/components/layout/head'
 import PostCard from '@/components/post/post-card'
