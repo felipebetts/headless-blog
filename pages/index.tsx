@@ -1,5 +1,6 @@
 import AnimatedPostHero from '@/components/home/AnimatedPostHero'
 import Head from '@/components/layout/head'
+import { AdSenseUnit, AdSenseUnitScript } from '@/components/libs/google-ad-unit'
 import PostCard from '@/components/post/post-card'
 import { GetStaticProps } from 'next'
 
@@ -27,7 +28,9 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
       <Head 
         title="Blog de tecnologia"
         description='O seu blog com informacoes e noticias quentinhas de tecnologia.'
-      />
+      >
+        <AdSenseUnitScript />
+      </Head>
       <div className="mb-16 w-full min-w-screen h-[800px] sm:h-[60vh] grid grid-cols-1 grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 lg:grid-cols-4">
         <div className="lg:col-span-2">
           <AnimatedPostHero post={posts[0]} />
@@ -68,6 +71,7 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
 
         <div className="my-10 w-full h-48 rounded-md bg-slate-500 text-white text-xl text-center">
           AD
+          <AdSenseUnit />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 my-10">
@@ -87,6 +91,7 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
 
         <div className="my-10 w-full h-48 rounded-md bg-slate-500 text-white text-xl text-center">
           AD
+          <AdSenseUnit />
         </div>
 
       </main>
