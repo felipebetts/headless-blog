@@ -14,6 +14,7 @@ import YoutubePlayer from '@/components/libs/youtube-player'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { AdSenseScript, AdSenseUnit, AdSenseUnitScript } from '@/components/libs/google-ad-unit'
 import useTags from '@/hooks/use-tags'
+import { formatDate } from '@/utils/format'
 
 interface Props {
   slug: string
@@ -68,7 +69,7 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead, tags }) => {
               <div
                 className='text-slate-500 dark:text-slate-300 text-sm pt-4'
               >
-                {frontmatter.date}
+                {formatDate(frontmatter.date)}
               </div>
             </div>
             <h3 className='text-2xl py-6 mb-6'>

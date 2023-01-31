@@ -3,6 +3,7 @@ import Link from '../common/link'
 import NextLink from 'next/link'
 import classNames from '@/utils/classnames'
 import HeroImage from './hero-image'
+import { formatDate } from '@/utils/format'
 
 interface Props {
     date: string
@@ -66,7 +67,7 @@ const PostCard: React.FC<Props> = ({
         </NextLink>
         <div className="flex w-full">
             <p className='text-slate-500 dark:text-slate-300 text-sm pt-4'>
-                { date }
+                { formatDate(date) }
             </p>
         </div>
     </div>
