@@ -5,6 +5,7 @@ import Link from 'next/link'
 import classNames from '@/utils/classnames'
 import { navigation } from '@/utils/contants'
 import useTags from '@/hooks/use-tags'
+import ToggleDarkModeButton from '../common/button/toggle-dark-mode-button'
 
 const Navbar: React.FC = () => {
 
@@ -60,10 +61,11 @@ const Navbar: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="flex items-center">
+                <ToggleDarkModeButton />
                 <button
                   type="button"
-                  className="rounded-md bg-white dark:bg-slate-800 p-1 text-slate-400 dark:hover:text-indigo-700 hover:text-black  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  className="rounded-md bg-white dark:bg-slate-800 p-1 text-slate-400 dark:hover:text-indigo-700 hover:text-black outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <span className="sr-only">Search</span>
                   

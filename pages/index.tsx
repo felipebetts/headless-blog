@@ -25,13 +25,13 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
         <AnimatedPostHero post={posts[2]} />
       </div>
       <main className='mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 py-2 sm:py-4'>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 my-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {posts && posts.map((post, i) => i % 3 === 0 && i !== 0 ? (
           <>
             <div className="lg:my-10 w-full h-48 sm:h-full lg:h-48 rounded-md bg-slate-500 text-white text-xl text-center lg:col-span-3">
               AD
             </div>
-            <div key={post.slug} className='w-full'>
+            <div key={post.slug} className='w-full my-4'>
               <PostCard
                 date={post.frontmatter.date}
                 slug={post.slug}
@@ -43,7 +43,7 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
             </div>
           </>
         ) : (
-          <div key={post.slug} className='w-full'>
+          <div key={post.slug} className='w-full my-4'>
             <PostCard
               date={post.frontmatter.date}
               slug={post.slug}
