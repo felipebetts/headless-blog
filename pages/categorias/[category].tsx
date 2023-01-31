@@ -5,8 +5,10 @@ import matter from 'gray-matter'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import PostCard from '@/components/post/post-card'
 import Pill from '@/components/common/pill'
+import useTags from '@/hooks/use-tags'
 
-const Category: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ category, posts }) => {
+const Category: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ category, posts, tags }) => {
+  useTags(tags)
   return (
     <main className='mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 py-2 sm:py-4'>
       <h1
@@ -108,7 +110,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       posts,
-      category: params?.category
+      category: params?.category,
+      tags
     }
   }
 }

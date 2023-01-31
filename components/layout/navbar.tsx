@@ -78,34 +78,33 @@ const Navbar: React.FC = () => {
           </div>
 
           <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-150"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-150"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Disclosure.Panel className="sm:hidden">
+              <div className="space-y-1 px-2 pt-2 pb-3">
+                {navigationTags && navigationTags.map((item) => (
+                  <Disclosure.Button
+                    key={item.name}
+                    as={Link}
+                    href={item.href}
+                    className={classNames(
+                      item.current ? ' text-black border-l-2 border-l-indigo-500' : 'text-gray-400 hover:text-black',
+                      'block px-3 py-2 text-base font-medium'
+                    )}
+                    aria-current={item.current ? 'page' : undefined}
                   >
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigationTags && navigationTags.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as={Link}
-                  href={item.href}
-                  className={classNames(
-                    item.current ? ' text-black border-l-2 border-l-indigo-500' : 'text-gray-400 hover:text-black',
-                    'block px-3 py-2 text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
-            </div>
-          </Disclosure.Panel>
-
-                  </Transition>
+                    {item.name}
+                  </Disclosure.Button>
+                ))}
+              </div>
+            </Disclosure.Panel>
+          </Transition>
         </>
       )}
     </Disclosure>

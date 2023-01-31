@@ -5,11 +5,14 @@ const useTags = (tags?: string[]) => {
 
   const { state, dispatch } = useContext(Store)
 
-  const navigationTags = state.tags && state.tags.map(tag => ({
-    name: tag,
-    href: `/categorias/${tag}`,
-    current: false
-  }))
+  const navigationTags = state.tags && state.tags.map(tag => {
+    
+    return {
+      name: tag,
+      href: `/categorias/${tag}`,
+      current: false
+    }
+  })
 
   const handleSetTags = useCallback(() => {
     if (!state.tags && dispatch && tags) {

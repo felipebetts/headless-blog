@@ -2,9 +2,7 @@ import AnimatedPostHero from '@/components/home/AnimatedPostHero'
 import Head from '@/components/layout/head'
 import PostCard from '@/components/post/post-card'
 import useTags from '@/hooks/use-tags'
-import { Store } from '@/utils/store'
 import { GetStaticProps } from 'next'
-import { useContext, useEffect } from 'react'
 
 interface FrontMatterParams {
   title: string
@@ -25,13 +23,7 @@ interface StaticProps {
 }
 
 const Home: React.FC<StaticProps> = ({ posts, tags }) => {
-
-  const tagsValues = useTags(tags)
-
-  useEffect(() => {
-    console.log('tagsValues:', tagsValues)
-  },[tagsValues])
-
+  useTags(tags)
   return (
     <>
       <Head 
