@@ -1,9 +1,8 @@
 import React from 'react'
 import Link from '../common/link'
 import NextLink from 'next/link'
-import classNames from '@/utils/classnames'
-import HeroImage from './hero-image'
 import { formatDate } from '@/utils/format'
+import Image from 'next/image'
 
 interface Props {
     date: string
@@ -25,10 +24,18 @@ const PostCard: React.FC<Props> = ({
   return (
     <div className="w-full h-full">
         <NextLink href={`/posts/${slug}`}>
-            <div
+            {/* <div
                 style={{ backgroundImage: `url('${thumbnailUrl}')`}}
                 className={`bg-cover bg-center h-72`}
-            />
+            /> */}
+            <div className="h-72 w-full relative overflow-hidden">
+                <Image 
+                    src={thumbnailUrl}
+                    alt='slug'
+                    fill
+                    className='object-cover'
+                />
+            </div>
         </NextLink>
         <div className="flex items-center text-xs text-slate-400 py-2">
             {tags && (
