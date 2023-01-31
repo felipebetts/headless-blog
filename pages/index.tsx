@@ -75,25 +75,31 @@ export const getStaticProps: GetStaticProps = async () => {
     const files = fs.readdirSync(path.join('posts'))
 
     const tags: Array<string> = []
-    const posts = files.map((filename: string, i: number) => {
-      const markdownWithMeta = fs.readFileSync(path.join('posts', filename))
-      const { data, content } = matter(markdownWithMeta)
-      const readingTime = require('reading-time')
-      const stats = readingTime(content)
-      const minutesToRead = Math.ceil(stats.minutes)
-      
-      data?.tags.forEach((el: string) => {
-        if (!tags.includes(el)) {
-          tags.push(el) 
+    const posts = files
+      .map((filename: string, i: number) => {
+        const markdownWithMeta = fs.readFileSync(path.join('posts', filename))
+        const { data, content } = matter(markdownWithMeta)
+        const readingTime = require('reading-time')
+        const stats = readingTime(content)
+        const minutesToRead = Math.ceil(stats.minutes)
+        
+        data?.tags.forEach((el: string) => {
+          if (!tags.includes(el)) {
+            tags.push(el) 
+          }
+        })
+        
+        return {
+          frontmatter: data,
+          slug: filename.split('.')[0],
+          minutesToRead
         }
       })
-      
-      return {
-        frontmatter: data,
-        slug: filename.split('.')[0],
-        minutesToRead
-      }
-    })
+      .sort((a: PostParams, b: PostParams) => {
+        const timeA = new Date(a.frontmatter.date).getTime()
+        const timeB = new Date(b.frontmatter.date).getTime()
+        return timeB - timeA
+      })
     console.log('tags:', tags)
     // console.log('posts:', posts)
 
