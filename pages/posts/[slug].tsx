@@ -38,7 +38,7 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead, tags }) => {
       >
         <AdSenseUnitScript />
       </Head>
-      <HeroImage src={frontmatter.thumbnailUrl}  />
+      <HeroImage src={frontmatter.thumbnailUrl} alt={`${slug}_hero_img`} />
       <main className={`mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 ${styles.postContent}`}>
         <div className="w-full flex flex-col lg:flex-row">
           <article className="w-full flex-1 lg:pr-4 pb-6">
