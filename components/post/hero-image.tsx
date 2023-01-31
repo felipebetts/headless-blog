@@ -15,7 +15,7 @@ const HeroImage: React.FC<Props> = ({ src, alt }) => {
         src={src}
         alt={alt}
         fill
-        priority={true}
+        // priority={true}
         className='object-cover'
       />
     </div>
