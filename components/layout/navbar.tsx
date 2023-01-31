@@ -10,10 +10,6 @@ const Navbar: React.FC = () => {
 
   const { navigationTags } = useTags()
 
-  useEffect(() => {
-    console.log('navigationTags:', navigationTags)
-  }, [navigationTags])
-
   return (
     <Disclosure as="nav" className="bg-white drop-shadow-md">
       {({ open }) => (
