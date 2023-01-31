@@ -1,6 +1,6 @@
-import { PostParams } from '@/pages'
 import React from 'react'
 import NextLink from 'next/link'
+import { PostParams } from '@/utils/types'
 
 interface Props {
     post: PostParams
