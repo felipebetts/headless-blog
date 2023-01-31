@@ -5,6 +5,7 @@ import Link from 'next/link'
 import classNames from '@/utils/classnames'
 import { navigation } from '@/utils/contants'
 import useTags from '@/hooks/use-tags'
+import Image from 'next/image'
 
 const Navbar: React.FC = () => {
 
@@ -30,12 +31,16 @@ const Navbar: React.FC = () => {
               <div className="flex flex-1 h-16 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                 <Link href='/'>
-                    <img
+                    <Image
                       className="block h-8 w-auto lg:hidden"
+                      width={64}
+                      height={48}
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                       alt="Your Company"
                     />
-                    <img
+                    <Image
+                      width={64}
+                      height={48}
                       className="hidden h-8 w-auto lg:block"
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                       alt="Your Company"

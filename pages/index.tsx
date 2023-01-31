@@ -19,10 +19,10 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
       />
       <div className="mb-16 w-full min-w-screen h-[800px] lg:h-[60vh] grid grid-cols-1 grid-rows-3 lg:grid-rows-1 lg:grid-cols-3 xl:grid-cols-4">
         <div className="xl:col-span-2">
-          <AnimatedPostHero post={posts[0]} />
+          <AnimatedPostHero post={posts[0]} key='post_0' />
         </div>
-        <AnimatedPostHero post={posts[1]} />
-        <AnimatedPostHero post={posts[2]} />
+        <AnimatedPostHero post={posts[1]} key='post_1' />
+        <AnimatedPostHero post={posts[2]} key='post_2' />
       </div>
       <main className='mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 py-2 sm:py-4'>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 my-10">
