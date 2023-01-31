@@ -28,6 +28,7 @@ const AnimatedPostHero: React.FC<Props> = ({ post }) => {
           src={post.frontmatter.thumbnailUrl}
           alt={post.slug}
           fill
+          priority={true}
           className='object-cover'
         />
         <div className="absolute top-0 left-0 w-full h-full bg-gray-900/50 z-10 transition-all duration-500 hover:scale-110">

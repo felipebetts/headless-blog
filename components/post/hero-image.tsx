@@ -7,18 +7,6 @@ interface Props {
 }
 
 const HeroImage: React.FC<Props> = ({ src, alt }) => {
-
-  let bgUrl = `bg-transparent`
-  if (src) {
-    bgUrl = `url('${src}')`
-  }
-  
-  // <div
-  //   style={{ backgroundImage: bgUrl}}
-  //   className={`
-  //     bg-cover bg-center h-72 lg:h-[70vh]
-  //   `}
-  // />
   return (
     <div
       className='relative h-72 lg:h-[70vh]'    
@@ -27,6 +15,7 @@ const HeroImage: React.FC<Props> = ({ src, alt }) => {
         src={src}
         alt={alt}
         fill
+        priority={true}
         className='object-cover'
       />
     </div>
