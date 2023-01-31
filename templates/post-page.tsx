@@ -13,7 +13,7 @@ const PostPage = () => {
             title='ChatGPT é aprovada em exames de MBA, médicos e advogados nos EUA'
             description='A ChatGPT passou em testes importantes nos EUA e se fosse uma pessoa de verdade, estaria pronta para ser uma boa gestora, médica ou advogada'
           />
-          <HeroImage  />
+          <HeroImage src='/images/woman-in-tech-graphs.jpg' alt='chatgpt-aprovada-em-testes-nos-eua'  />
           <main className="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
             <div className="w-full flex sm:flex-col">
               <article className="flex-1">

@@ -1,23 +1,25 @@
+import Image from 'next/image'
 import React, { useEffect } from 'react'
 
 interface Props {
-  src?: string
+  src: string,
+  alt: string
 }
 
-const HeroImage: React.FC<Props> = ({ src }) => {
-
-  let bgUrl = `bg-transparent`
-  if (src) {
-    bgUrl = `url('${src}')`
-  }
-
+const HeroImage: React.FC<Props> = ({ src, alt }) => {
   return (
     <div
-      style={{ backgroundImage: bgUrl}}
-      className={`
-        bg-cover bg-center h-72 lg:h-[70vh]
-      `}
-    />
+      className='relative h-72 lg:h-[70vh]'    
+    >
+      <Image 
+        src={src}
+        alt={alt}
+        fill
+        // priority={true}
+        className='object-cover'
+      />
+    </div>
+    
   )
 }
 

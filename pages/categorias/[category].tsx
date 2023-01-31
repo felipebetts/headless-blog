@@ -111,8 +111,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       }
     })
     .filter((post, idx) => post?.frontmatter?.tags && post.frontmatter.tags.includes(params?.category))
-  // console.log('tags:', tags)
-    // console.log('posts:', posts)
+    .sort((a, b) => {
+      const timeA = new Date(a.frontmatter.date).getTime()
+      const timeB = new Date(b.frontmatter.date).getTime()
+      return timeB - timeA
+    })
 
   return {
     props: {
