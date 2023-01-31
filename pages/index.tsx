@@ -2,26 +2,13 @@ import AnimatedPostHero from '@/components/home/AnimatedPostHero'
 import Head from '@/components/layout/head'
 import PostCard from '@/components/post/post-card'
 import useTags from '@/hooks/use-tags'
+import { PostParams } from '@/utils/types'
 import { GetStaticProps } from 'next'
 
-interface FrontMatterParams {
-  title: string
-  date: string
-  description: string
-  thumbnailUrl: string
-  tags?: Array<string>
-}
-
-export interface PostParams {
-  frontmatter: FrontMatterParams
-  slug: string
-  minutesToRead: number
-}
-interface StaticProps {
+export interface StaticProps {
   posts: Array<PostParams>
   tags?: Array<string>
 }
-
 const Home: React.FC<StaticProps> = ({ posts, tags }) => {
   useTags(tags)
   return (

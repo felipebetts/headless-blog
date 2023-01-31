@@ -6,8 +6,15 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import PostCard from '@/components/post/post-card'
 import Pill from '@/components/common/pill'
 import useTags from '@/hooks/use-tags'
+import { PostParams } from '@/utils/types'
 
-const Category: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ category, posts, tags }) => {
+interface StaticProps {
+  category: string
+  posts: Array<PostParams>
+  tags?: Array<string>
+}
+
+const Category: React.FC<StaticProps> = ({ category, posts, tags }) => {
   useTags(tags)
   return (
     <main className='mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 py-2 sm:py-4'>
