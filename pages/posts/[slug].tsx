@@ -13,18 +13,21 @@ import Link from '@/components/common/link'
 import YoutubePlayer from '@/components/libs/youtube-player'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { AdSenseScript, AdSenseUnit, AdSenseUnitScript } from '@/components/libs/google-ad-unit'
+import useTags from '@/hooks/use-tags'
 
 interface Props {
   slug: string
   content: any
   minutesToRead: number
+  tags?: string[]
 }
 
 const components = { SyntaxHighlighter, LabeledImage, YoutubePlayer }
 
-const Post: React.FC<Props> = ({ slug, content, minutesToRead }) => {
+const Post: React.FC<Props> = ({ slug, content, minutesToRead, tags }) => {
 
   const { frontmatter } = content
+  useTags(tags)
 
   return (
     <>
@@ -46,7 +49,7 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead }) => {
               ))}
               <span className='pr-2'> • </span>
               {minutesToRead && (
-                <div className="flex items-center text-gray-500">
+                <div className="flex items-center text-slate-500 dark:text-slate-300">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -63,7 +66,7 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead }) => {
                 {frontmatter.title}
               </h1>
               <div
-                className='text-gray-500 text-sm pt-4'
+                className='text-slate-500 dark:text-slate-300 text-sm pt-4'
               >
                 {frontmatter.date}
               </div>
@@ -103,8 +106,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const markdown = fs.readFileSync(path.join('posts', params?.slug + '.mdx'), 'utf-8')
   const matter = require('gray-matter')
+  
+  const files = fs.readdirSync(path.join('posts'))
+  const tags: Array<string> = []
+  files.forEach((filename: string, i: number) => {
+    const markdownWithMeta = fs.readFileSync(path.join('posts', filename))
+    const { data } = matter(markdownWithMeta)
+    
+    data?.tags.forEach((el: string) => {
+      if (!tags.includes(el)) {
+        tags.push(el) 
+      }
+    })
+  
+  })
+  
+  const markdown = fs.readFileSync(path.join('posts', params?.slug + '.mdx'), 'utf-8')
   const { content } = matter(markdown)
   const readingTime = require('reading-time')
   const stats = readingTime(content)
@@ -125,7 +143,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       slug: params?.slug,
       content: serializedContent,
-      minutesToRead
+      minutesToRead,
+      tags
     }
   }
 }

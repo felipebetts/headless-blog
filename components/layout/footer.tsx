@@ -1,20 +1,18 @@
 import React from 'react'
 import NextLink from 'next/link'
-
-const navigation = [
-  // { name: 'Dashboard', href: '#dashboard', current: true },
-  // { name: 'Team', href: '#team', current: false },
-  // { name: 'Projects', href: '#projects', current: false },
-  { name: 'Dummy post', href: '/dummy_post', current: false },
-]
+import { navigation } from '@/utils/contants'
+import useTags from '@/hooks/use-tags'
 
 const Footer = () => {
+
+  const { navigationTags } = useTags()
+
   return (
     <footer
-        className='min-w-screen bg-indigo-700 text-white h-64 py-4'
+        className='min-w-screen bg-indigo-700 dark:bg-slate-900 text-white h-64 py-4'
     >
-      <div className="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 text-xl font-medium">
-        {navigation.map(el => (
+      <div className="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 text-xl font-medium h-full flex flex-col flex-wrap">
+        {navigationTags && navigationTags.map(el => (
           <NextLink 
             href={el.href}
             key={el.href}

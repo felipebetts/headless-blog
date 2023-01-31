@@ -21,8 +21,13 @@ const intialState = {
 
 const reducer = (state: StateValue, action: ActionValue) => {
     switch(action.type) {
-        case '':
-            return state
+        case 'SET_TAGS':
+            const tags = action.payload
+            console.log('set tags!')
+            return {
+                ...state,
+                tags
+            }
         default:
             return state
     }
@@ -31,7 +36,8 @@ const reducer = (state: StateValue, action: ActionValue) => {
 export const Store = createContext<StoreValue>({
     state: {
         tags: null
-    }
+    },
+    dispatch: () => {}
 })
 
 interface Props {

@@ -1,35 +1,24 @@
 import AnimatedPostHero from '@/components/home/AnimatedPostHero'
 import Head from '@/components/layout/head'
 import PostCard from '@/components/post/post-card'
+import useTags from '@/hooks/use-tags'
+import { PostParams } from '@/utils/types'
 import { GetStaticProps } from 'next'
 
-interface FrontMatterParams {
-  title: string
-  date: string
-  description: string
-  thumbnailUrl: string
-  tags?: Array<string>
-}
-
-export interface PostParams {
-  frontmatter: FrontMatterParams
-  slug: string
-  minutesToRead: number
-}
-interface StaticProps {
+export interface StaticProps {
   posts: Array<PostParams>
   tags?: Array<string>
 }
-
 const Home: React.FC<StaticProps> = ({ posts, tags }) => {
+  useTags(tags)
   return (
     <>
       <Head 
         title="Blog de tecnologia"
         description='O seu blog com informacoes e noticias quentinhas de tecnologia.'
       />
-      <div className="mb-16 w-full min-w-screen h-[800px] sm:h-[60vh] grid grid-cols-1 grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 lg:grid-cols-4">
-        <div className="lg:col-span-2">
+      <div className="mb-16 w-full min-w-screen h-[800px] lg:h-[60vh] grid grid-cols-1 grid-rows-3 lg:grid-rows-1 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="xl:col-span-2">
           <AnimatedPostHero post={posts[0]} />
         </div>
         <AnimatedPostHero post={posts[1]} />
@@ -37,7 +26,23 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
       </div>
       <main className='mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 py-2 sm:py-4'>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 my-10">
-        {posts && posts.map(post => (
+        {posts && posts.map((post, i) => i % 3 === 0 && i !== 0 ? (
+          <>
+            <div className="lg:my-10 w-full h-48 sm:h-full lg:h-48 rounded-md bg-slate-500 text-white text-xl text-center lg:col-span-3">
+              AD
+            </div>
+            <div key={post.slug} className='w-full'>
+              <PostCard
+                date={post.frontmatter.date}
+                slug={post.slug}
+                tags={post.frontmatter.tags}
+                title={post.frontmatter.title}
+                thumbnailUrl={post.frontmatter.thumbnailUrl}
+                minutesToRead={post.minutesToRead}
+              />
+            </div>
+          </>
+        ) : (
           <div key={post.slug} className='w-full'>
             <PostCard
               date={post.frontmatter.date}
@@ -48,46 +53,12 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
               minutesToRead={post.minutesToRead}
             />
           </div>
-          ))}
+        ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 my-10">
-          {posts && posts.map(post => (
-            <div key={post.slug} className='w-full'>
-              <PostCard
-                date={post.frontmatter.date}
-                slug={post.slug}
-                tags={post.frontmatter.tags}
-                title={post.frontmatter.title}
-                thumbnailUrl={post.frontmatter.thumbnailUrl}
-                minutesToRead={post.minutesToRead}
-              />
-            </div>
-            ))}
-        </div>
-
-        <div className="my-10 w-full h-48 rounded-md bg-slate-500 text-white text-xl text-center">
+        {/* <div className="my-10 w-full h-48 rounded-md bg-slate-500 text-white text-xl text-center">
           AD
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 my-10">
-          {posts && posts.map(post => (
-            <div key={post.slug} className='w-full'>
-              <PostCard
-                date={post.frontmatter.date}
-                slug={post.slug}
-                tags={post.frontmatter.tags}
-                title={post.frontmatter.title}
-                thumbnailUrl={post.frontmatter.thumbnailUrl}
-                minutesToRead={post.minutesToRead}
-              />
-            </div>
-            ))}
-        </div>
-
-        <div className="my-10 w-full h-48 rounded-md bg-slate-500 text-white text-xl text-center">
-          AD
-        </div>
+        </div> */}
 
       </main>
     </>

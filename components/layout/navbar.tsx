@@ -1,26 +1,24 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import classNames from '@/utils/classnames'
-
-const navigation = [
-    // { name: 'Dashboard', href: '#dashboard', current: true },
-    // { name: 'Team', href: '#team', current: false },
-    // { name: 'Projects', href: '#projects', current: false },
-    { name: 'Dummy post', href: '/dummy_post', current: false },
-]
+import { navigation } from '@/utils/contants'
+import useTags from '@/hooks/use-tags'
 
 const Navbar: React.FC = () => {
+
+  const { navigationTags } = useTags()
+
   return (
-    <Disclosure as="nav" className="bg-white drop-shadow-md">
+    <Disclosure as="nav" className="bg-white dark:bg-slate-800 dark:text-white drop-shadow-md">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-200 hover:text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-slate-400 hover:bg-gray-200 hover:text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -46,12 +44,12 @@ const Navbar: React.FC = () => {
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4 my-auto">
-                    {navigation.map((item) => (
+                    {navigationTags && navigationTags.map((item) => (
                       <Link
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'border-b-2 border-b-indigo-500' : 'text-gray-500 hover:text-black',
+                          item.current ? 'border-b-2 border-b-indigo-500' : 'text-slate-500 dark:text-slate-200 hover:text-indigo-700',
                           'px-3 py-2 text-sm font-medium h-16 flex justify-center items-center'
                         )}
                         aria-current={item.current ? 'page' : undefined}
@@ -65,7 +63,7 @@ const Navbar: React.FC = () => {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  className="rounded-md bg-white p-1 text-gray-400 hover:text-black  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  className="rounded-md bg-white dark:bg-slate-800 p-1 text-slate-400 dark:hover:text-indigo-700 hover:text-black  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <span className="sr-only">Search</span>
                   
@@ -76,34 +74,33 @@ const Navbar: React.FC = () => {
           </div>
 
           <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-150"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-150"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Disclosure.Panel className="sm:hidden">
+              <div className="space-y-1 px-2 pt-2 pb-3">
+                {navigationTags && navigationTags.map((item) => (
+                  <Disclosure.Button
+                    key={item.name}
+                    as={Link}
+                    href={item.href}
+                    className={classNames(
+                      item.current ? ' text-black border-l-2 border-l-indigo-500' : 'text-slate-400 hover:text-black',
+                      'block px-3 py-2 text-base font-medium'
+                    )}
+                    aria-current={item.current ? 'page' : undefined}
                   >
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as={Link}
-                  href={item.href}
-                  className={classNames(
-                    item.current ? ' text-black border-l-2 border-l-indigo-500' : 'text-gray-400 hover:text-black',
-                    'block px-3 py-2 text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
-            </div>
-          </Disclosure.Panel>
-
-                  </Transition>
+                    {item.name}
+                  </Disclosure.Button>
+                ))}
+              </div>
+            </Disclosure.Panel>
+          </Transition>
         </>
       )}
     </Disclosure>
