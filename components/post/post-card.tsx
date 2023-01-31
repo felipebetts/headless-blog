@@ -29,19 +29,21 @@ const PostCard: React.FC<Props> = ({
                 className={`bg-cover bg-center h-72`}
             />
         </NextLink>
-        <div className="flex items-center text-xs text-gray-400">
+        <div className="flex items-center text-xs text-gray-400 py-2">
             {tags && (
                 <>
                     {tags.map((tag, i) => i === tags.length - 1 ? (
-                        <Link href={`/categorias/${tag}`} key={`${slug}_${tag}`}>
-                            { tag }
-                            </Link>
-                    ) : (
-                        <>
-                            <Link href={`/categorias/${tag}`} key={`${slug}_${tag}`} px={0}>
+                        <div className='pr-2' key={`${slug}_${tag}`}>
+                            <Link href={`/categorias/${tag}`} px={0}>
                                 { tag }
                             </Link>
-                        </>
+                        </div>
+                    ) : (
+                        <div className='pr-2' key={`${slug}_${tag}`}>
+                            <Link href={`/categorias/${tag}`} px={0}>
+                                { tag }
+                            </Link>
+                        </div>
                     ))}
                     <span className='pr-2'> • </span>
                 </>

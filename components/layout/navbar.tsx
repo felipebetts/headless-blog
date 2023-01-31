@@ -1,17 +1,19 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import classNames from '@/utils/classnames'
-
-const navigation = [
-    // { name: 'Dashboard', href: '#dashboard', current: true },
-    // { name: 'Team', href: '#team', current: false },
-    // { name: 'Projects', href: '#projects', current: false },
-    { name: 'Dummy post', href: '/dummy_post', current: false },
-]
+import { navigation } from '@/utils/contants'
+import useTags from '@/hooks/use-tags'
 
 const Navbar: React.FC = () => {
+
+  const { navigationTags } = useTags()
+
+  useEffect(() => {
+    console.log('navigationTags:', navigationTags)
+  }, [navigationTags])
+
   return (
     <Disclosure as="nav" className="bg-white drop-shadow-md">
       {({ open }) => (
@@ -46,7 +48,7 @@ const Navbar: React.FC = () => {
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4 my-auto">
-                    {navigation.map((item) => (
+                    {navigationTags && navigationTags.map((item) => (
                       <Link
                         key={item.name}
                         href={item.href}
@@ -86,7 +88,7 @@ const Navbar: React.FC = () => {
                   >
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
+              {navigationTags && navigationTags.map((item) => (
                 <Disclosure.Button
                   key={item.name}
                   as={Link}
