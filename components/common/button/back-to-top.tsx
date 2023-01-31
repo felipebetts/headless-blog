@@ -29,7 +29,7 @@ const BackToTopButton = () => {
   return (
       <button
         className={classNames(
-          'fixed bottom-6 right-6 rounded-md bg-slate-300 hover:bg-slate-200 w-8 h-8 flex justify-center items-center drop-shadow-md hover:drop-shadow-none transition-all duration-100',
+          'fixed bottom-6 right-6 rounded-md bg-slate-300 dark:bg-slate-600 hover:bg-slate-200 dark:hover:bg-slate-700 w-8 h-8 flex justify-center items-center drop-shadow-md hover:drop-shadow-none transition-all duration-100',
           show ? 'block' : 'hidden'
         )}
         onClick={handleScrollTop}

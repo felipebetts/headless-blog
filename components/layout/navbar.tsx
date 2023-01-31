@@ -11,14 +11,14 @@ const Navbar: React.FC = () => {
   const { navigationTags } = useTags()
 
   return (
-    <Disclosure as="nav" className="bg-white drop-shadow-md">
+    <Disclosure as="nav" className="bg-white dark:bg-slate-800 dark:text-white drop-shadow-md">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-200 hover:text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-slate-400 hover:bg-gray-200 hover:text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'border-b-2 border-b-indigo-500' : 'text-gray-500 hover:text-black',
+                          item.current ? 'border-b-2 border-b-indigo-500' : 'text-slate-500 dark:text-slate-200 hover:text-indigo-700',
                           'px-3 py-2 text-sm font-medium h-16 flex justify-center items-center'
                         )}
                         aria-current={item.current ? 'page' : undefined}
@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  className="rounded-md bg-white p-1 text-gray-400 hover:text-black  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  className="rounded-md bg-white dark:bg-slate-800 p-1 text-slate-400 dark:hover:text-indigo-700 hover:text-black  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <span className="sr-only">Search</span>
                   
@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
                     as={Link}
                     href={item.href}
                     className={classNames(
-                      item.current ? ' text-black border-l-2 border-l-indigo-500' : 'text-gray-400 hover:text-black',
+                      item.current ? ' text-black border-l-2 border-l-indigo-500' : 'text-slate-400 hover:text-black',
                       'block px-3 py-2 text-base font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}
