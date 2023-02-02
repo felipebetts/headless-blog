@@ -1,3 +1,5 @@
+import Carousel from '@/components/common/carousel/carousel'
+import CarouselItem from '@/components/common/carousel/carousel-item'
 import AnimatedPostHero from '@/components/home/AnimatedPostHero'
 import Head from '@/components/layout/head'
 import PostCard from '@/components/post/post-card'
@@ -60,6 +62,20 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
           AD
         </div> */}
 
+        <Carousel>
+          <CarouselItem index={0} key={`caousel_item_${0}`}>
+            <div className="w-full h-full bg-gray-500 text-white">
+              carousel item 0
+            </div>
+          </CarouselItem>
+          <CarouselItem index={1} key={`caousel_item_${1}`}>
+            carousel item 1
+          </CarouselItem>
+          <CarouselItem index={2} key={`caousel_item_${2}`}>
+            carousel item 2
+          </CarouselItem>
+        </Carousel>
+
       </main>
     </>
   )
@@ -100,7 +116,7 @@ export const getStaticProps: GetStaticProps = async () => {
         const timeB = new Date(b.frontmatter.date).getTime()
         return timeB - timeA
       })
-    console.log('tags:', tags)
+    // console.log('tags:', tags)
     // console.log('posts:', posts)
 
     return {
