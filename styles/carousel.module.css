@@ -12,8 +12,10 @@
 }
 
 .slide {
-    /* flex: 0 0 auto;
-    max-width: min(70%, 620px); */
+    flex: 0 0 100%;
+    /* flex: 1; */
+    /* max-width: min(70%, 620px); */
+    /* max-width: 100%; */
     opacity: 0.4;
     transition: opacity 0.4s;
 }

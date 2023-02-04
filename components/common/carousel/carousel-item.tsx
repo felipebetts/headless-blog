@@ -21,7 +21,6 @@ const CarouselItem: React.FC<Props> = ({ index, children }) => {
     return (
         <div
             className={classNames(
-                "w-full h-full top-0 left-0", 
                 isActive ? 'active z-20' : 'z-0',
                 styles.slide
             )}
