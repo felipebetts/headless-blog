@@ -1,6 +1,7 @@
 import Carousel from '@/components/common/carousel/carousel'
 import CarouselItem from '@/components/common/carousel/carousel-item'
-import AnimatedPostHero from '@/components/home/AnimatedPostHero'
+import AnimatedPostHero from '@/components/home/animated-post-hero'
+import CarouselPostHero from '@/components/home/carousel-post-hero'
 import Head from '@/components/layout/head'
 import PostCard from '@/components/post/post-card'
 import useTags from '@/hooks/use-tags'
@@ -62,17 +63,15 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
           AD
         </div> */}
 
-        <Carousel>
-          <CarouselItem index={0} key={`caousel_item_${0}`}>
-            <div className="w-full h-full bg-gray-500 text-white">
-              carousel item 0
-            </div>
+        <Carousel className='w-full h-[65vh] rounded-md bg-white dark:bg-black'>
+          <CarouselItem index={0} key={`carousel_item_${0}`}>
+            <CarouselPostHero post={posts[0]} />
           </CarouselItem>
-          <CarouselItem index={1} key={`caousel_item_${1}`}>
-            carousel item 1
+          <CarouselItem index={1} key={`carousel_item_${1}`}>
+            <CarouselPostHero post={posts[1]} />
           </CarouselItem>
-          <CarouselItem index={2} key={`caousel_item_${2}`}>
-            carousel item 2
+          <CarouselItem index={2} key={`carousel_item_${2}`}>
+            <CarouselPostHero post={posts[2]} />
           </CarouselItem>
         </Carousel>
 

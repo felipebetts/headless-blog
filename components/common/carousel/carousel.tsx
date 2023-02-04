@@ -52,7 +52,7 @@ const Carousel: React.FC<Props> = ({ children, className }) => {
                     styles.viewport
                 )}
             >
-                <div className={classNames("flex relative min-h-[240px]", styles.container)}>
+                <div className={classNames("flex relative h-full min-h-[240px]", styles.container)}>
                     { children }
                 </div>
             </div>
