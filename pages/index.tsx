@@ -59,21 +59,19 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
         ))}
         </div>
 
-        {/* <div className="my-10 w-full h-48 rounded-md bg-slate-500 text-white text-xl text-center">
-          AD
-        </div> */}
+        
 
         <Carousel className='w-full h-[65vh] rounded-md bg-white dark:bg-black'>
-          <CarouselItem index={0} key={`carousel_item_${0}`}>
-            <CarouselPostHero post={posts[0]} />
-          </CarouselItem>
-          <CarouselItem index={1} key={`carousel_item_${1}`}>
-            <CarouselPostHero post={posts[1]} />
-          </CarouselItem>
-          <CarouselItem index={2} key={`carousel_item_${2}`}>
-            <CarouselPostHero post={posts[2]} />
-          </CarouselItem>
+          {posts.map((post, idx) => (
+            <CarouselItem index={idx} key={`carousel_item_${idx}`}>
+              <CarouselPostHero post={post} />
+            </CarouselItem>
+          ))}
         </Carousel>
+
+        <div className="my-10 w-full h-48 rounded-md bg-slate-500 text-white text-xl text-center">
+          AD
+        </div>
 
       </main>
     </>
