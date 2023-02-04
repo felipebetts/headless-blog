@@ -72,9 +72,9 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead, tags }) => {
                 {formatDate(frontmatter.date)}
               </div>
             </div>
-            <h3 className='text-2xl py-6 mb-6'>
+            <div className='text-2xl py-6 mb-6 font-medium'>
               {frontmatter.description}
-            </h3>
+            </div>
             <MDXRemote {...content} components={components} />
           </article>
           <aside className='lg:shrink-0 w-full lg:w-64 p-2 relative'>
