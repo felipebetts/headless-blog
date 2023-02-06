@@ -73,7 +73,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     })
   
   })
-  console.log('tags:', tags)
+  // console.log('tags:', tags)
 
   const paths = tags.map(tag => ({
     params: {
