@@ -34,9 +34,9 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 my-10">
           {posts && posts.map((post, i) => i % 3 === 0 && i !== 0 ? (
             <>
-              <div key={`ad_${i}`} className="lg:my-10 w-full h-48 sm:h-full lg:h-48 rounded-md bg-slate-500 text-white text-xl text-center lg:col-span-3">
+              {/* <div key={`ad_${i}`} className="lg:my-10 w-full h-48 sm:h-full lg:h-48 rounded-md bg-slate-500 text-white text-xl text-center lg:col-span-3">
                 AD
-              </div>
+              </div> */}
               <div key={post.slug} className='w-full'>
                 <PostCard
                   date={post.frontmatter.date}
@@ -64,7 +64,10 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
 
         
 
-        <Carousel withButtons className='w-full h-[65vh] rounded-md bg-white dark:bg-black'>
+        <Carousel
+          withButtons
+          className='w-full h-[65vh] rounded-md bg-white dark:bg-black mb-8'
+        >
           {posts.map((post, idx) => (
             <CarouselItem index={idx} key={`carousel_item_${idx}`}>
               <CarouselPostHero post={post} />
@@ -72,9 +75,9 @@ const Home: React.FC<StaticProps> = ({ posts, tags }) => {
           ))}
         </Carousel>
 
-        <div className="my-10 w-full h-48 rounded-md bg-slate-500 text-white text-xl text-center">
+        {/* <div className="my-10 w-full h-48 rounded-md bg-slate-500 text-white text-xl text-center">
           AD
-        </div>
+        </div> */}
 
       </main>
     </>
