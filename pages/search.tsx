@@ -24,7 +24,7 @@ const Search: React.FC<StaticProps> = ({ posts, tags }) => {
     return (
         <>
           <Head 
-            title="Blog de tecnologia"
+            title="Resultados da busca"
             description='O seu blog com informacoes e noticias quentinhas de tecnologia.'
           />
           <main className='mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 py-2 sm:py-4'>

@@ -18,8 +18,10 @@ const Navbar: React.FC = () => {
 
   const handleSearch = (e: FormEvent) => {
     e.preventDefault()
-    setSearchValue('')
-    router.push(`/search?q=${searchValue}`)
+    if (searchValue.length > 0) {
+      setSearchValue('')
+      router.push(`/search?q=${searchValue}`)
+    }
   }
 
   return (
