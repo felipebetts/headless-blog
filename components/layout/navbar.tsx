@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { FormEvent, Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
@@ -6,10 +6,21 @@ import classNames from '@/utils/classnames'
 import { navigation } from '@/utils/contants'
 import useTags from '@/hooks/use-tags'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 const Navbar: React.FC = () => {
 
+  const [searchOpen, setSearchOpen] = useState<boolean>(false)
+  const [searchValue, setSearchValue] = useState<string>('')
+
   const { navigationTags } = useTags()
+  const router = useRouter()
+
+  const handleSearch = (e: FormEvent) => {
+    e.preventDefault()
+    setSearchValue('')
+    router.push(`/search?q=${searchValue}`)
+  }
 
   return (
     <Disclosure as="nav" className="bg-white dark:bg-slate-800 dark:text-white drop-shadow-md">
@@ -65,16 +76,27 @@ const Navbar: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="rounded-md bg-white dark:bg-slate-800 p-1 text-slate-400 dark:hover:text-indigo-700 hover:text-black  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">Search</span>
-                  
-                  <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-              </div>
+              <form
+                className="absolute inset-y-0 right-0 hidden sm:flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+                onSubmit={handleSearch}
+              >
+                  <input
+                    type="text"
+                    className={`${searchOpen ? 'w-48 py-2 px-4' : 'w-0'} h-full mr-2 ml-4 rounded-md text-black transition-all duration-500`}
+                    placeholder='Pesquise posts'
+                    value={searchValue}
+                    onChange={e => setSearchValue(e.target.value)}
+                  />
+                  <button
+                    type={searchOpen ? 'submit' : 'button'}
+                    className={`rounded-md bg-white dark:bg-slate-800 p-1 text-slate-400 dark:hover:text-indigo-700 hover:text-black  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800`}
+                    onClick={searchOpen ? undefined  : () => setSearchOpen(true)}
+                  >
+                    <span className="sr-only">Search</span>
+                    
+                    <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
+              </form>
             </div>
           </div>
 
@@ -89,6 +111,26 @@ const Navbar: React.FC = () => {
           >
             <Disclosure.Panel className="sm:hidden">
               <div className="space-y-1 px-2 pt-2 pb-3">
+                <form onSubmit={handleSearch}>
+                  <div className="flex">
+                    <input
+                      type="text"
+                      className='w-full py-2 px-4 rounded-md text-black'
+                      placeholder='Pesquise posts'
+                      value={searchValue}
+                      onChange={e => setSearchValue(e.target.value)}
+                    />
+                    <Disclosure.Button
+                      as='button'
+                      type="submit"
+                      className="px-3 rounded-md bg-white dark:bg-slate-800 text-slate-400 dark:hover:text-indigo-700 hover:text-black  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    >
+                      <span className="sr-only">Search</span>
+                  
+                      <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+                    </Disclosure.Button>
+                  </div>
+                </form>
                 {navigationTags && navigationTags.map((item) => (
                   <Disclosure.Button
                     key={item.name}
