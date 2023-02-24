@@ -2,11 +2,11 @@ import React from "react";
 import Script from "next/script";
 
 export const AdSenseScript: React.FC = () => (
-    <Script 
-        async 
-        id="Adsense-id"
+    <script 
+        async
+        // id="Adsense-id"
         onError={(e) => console.error("Script failed to load", e)}
-        strategy="afterInteractive"
+        // strategy="afterInteractive"
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6804568378105440"
         crossOrigin="anonymous" 
     />
@@ -39,9 +39,11 @@ export const AdSenseUnit: React.FC = () => (
 //     `}}
 // />
 export const AdSenseUnitScript: React.FC = () => (
-    <>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </>
+    <script
+        dangerouslySetInnerHTML={{
+            __html: `
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            `
+        }}
+    />
 )

@@ -1,4 +1,4 @@
-import { AdSenseScript } from '@/components/libs/google-ad-unit'
+import { AdSenseScript } from '@/components/libs/google-adsense'
 import { AnalyticsScripts } from '@/components/libs/google-analytics'
 import { Html, Head, Main, NextScript } from 'next/document'
 
