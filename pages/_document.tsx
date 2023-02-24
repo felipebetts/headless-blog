@@ -1,4 +1,5 @@
 import { AdSenseScript } from '@/components/libs/google-ad-unit'
+import { AnalyticsScripts } from '@/components/libs/google-analytics'
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
@@ -6,6 +7,7 @@ export default function Document() {
     <Html lang="pt-br">
       <Head>
         <AdSenseScript />
+        <AnalyticsScripts />
       </Head>
       <body>
         <Main />
