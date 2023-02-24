@@ -84,7 +84,10 @@ const Navbar: React.FC = () => {
               >
                   <input
                     type="text"
-                    className={`${searchOpen ? 'w-48 py-2 px-4' : 'w-0'} h-full mr-2 ml-4 rounded-md text-black transition-all duration-500`}
+                    className={classNames(
+                      searchOpen ? 'w-48 px-4' : 'w-0',
+                      'h-full py-2 mr-2 ml-4 rounded-md text-black transition-all duration-500'
+                    )}
                     placeholder='Pesquise posts'
                     value={searchValue}
                     onChange={e => setSearchValue(e.target.value)}
