@@ -6,7 +6,7 @@ import Router from 'next/router'
 import type { AppProps } from 'next/app'
 
 import 'nprogress/nprogress.css'
-import { AdSenseScript } from '@/components/libs/google-ad-unit'
+import { AdSenseScript } from '@/components/libs/google-adsense'
 import ScrollObserver from '@/utils/scroll-observer'
 import StoreProvider from '@/utils/store'
 import { useAnalytics } from '@/components/libs/google-analytics'

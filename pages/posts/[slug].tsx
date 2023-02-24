@@ -12,7 +12,7 @@ import LabeledImage from '@/components/post/labeled-image'
 import Link from '@/components/common/link'
 import YoutubePlayer from '@/components/libs/youtube-player'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { AdSenseScript, AdSenseUnit, AdSenseUnitScript } from '@/components/libs/google-ad-unit'
+import { AdSenseScript, AdSenseUnit, AdSenseUnitScript } from '@/components/libs/google-adsense'
 import useTags from '@/hooks/use-tags'
 import { formatDate } from '@/utils/format'
 
