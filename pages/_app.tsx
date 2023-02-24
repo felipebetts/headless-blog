@@ -9,6 +9,7 @@ import 'nprogress/nprogress.css'
 import { AdSenseScript } from '@/components/libs/google-ad-unit'
 import ScrollObserver from '@/utils/scroll-observer'
 import StoreProvider from '@/utils/store'
+import { useAnalytics } from '@/components/libs/google-analytics'
 
 
 Router.events.on('routeChangeStart', () => NProgress.start())
@@ -18,6 +19,7 @@ NProgress.configure({ showSpinner: false })
 
 
 export default function App({ Component, pageProps }: AppProps) {
+  useAnalytics()
   return (
     <>
       {/* <AdSenseScript /> */}
