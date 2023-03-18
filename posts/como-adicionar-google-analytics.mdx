@@ -1,0 +1,117 @@
+---
+title: Como adicionar Google Analytics no seu site em Next.js
+date: '2023-03-01T19:05:26.000Z'
+description: Acompanhe o desempenho do seu site com o Google Analytics! Neste artigo, você aprenderá como integrar o Google Analytics em seu site Next.js para monitorar seus visitantes e medir o sucesso de suas campanhas de marketing.
+thumbnailUrl: /images/como-adicionar-google-analytics/google-analytics.jpg
+tags: ['code', 'tutorial']
+---
+
+## Como funciona e quais são os benefícios do Google Analytics
+
+O Google Analytics é uma ferramenta gratuita que permite aos proprietários de sites acompanhar o desempenho de seu site. Ele fornece informações detalhadas sobre o comportamento do usuário, como a quantidade de visitantes, o tempo que eles passam no site, quais páginas eles visitam e quais ações eles realizam.
+
+Isso ajuda os proprietários do site a entender melhor o público e tomar decisões informadas sobre como melhorar a experiência do usuário e aumentar as conversões. Além disso, o Google Analytics também permite que você monitore campanhas de marketing e avalie o retorno sobre o investimento (ROI).
+
+## Configurando o Google Analytics
+
+O primeiro passo é criar e configurar a sua conta no Google Analytics. Para isso você só precisa ter uma conta Google.
+
+1. Navegue até o site do Analytics https://analytics.google.com/analytics/
+2. Clique em "Start Measuring" e configure a sua conta
+3. Após a sua conta ser criada, selecione a plataforma "Web" e crie uma data stream.
+4. Pronto! A data stream foi criada e recebemos o measurement id que precisamos
+
+## Implementando o código do Google Analytics
+
+1.  Primeiro vamos criar um arquivo chamado analytics.js para escrevermos o código do Analytics. O primeiro passo é adicionar o measurement id que criamos no site do Analytics e escrever o script base do analytics
+
+        <SyntaxHighlighter language="javascript">
+        {`
+            export const GA_TRACKING_ID = "minha measurement id" // insira a sua aqui
+
+            // deve ser colocado dentro da <Head> no _document.jsx
+            export const AnalyticsScripts: React.FC = () => (
+                <>
+                    {/* Global Site Tag (gtag.js) - Google Analytics */}
+                    <script
+                        async
+                        src={'https://www.googletagmanager.com/gtag/js?id=' + GA_TRACKING_ID}
+                    />
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: \`
+                                window.dataLayer = window.dataLayer || [];
+                                function gtag(){dataLayer.push(arguments);}
+                                gtag('js', new Date());
+                                gtag('config', '\${GA_TRACKING_ID}', {
+                                page_path: window.location.pathname,
+                                });
+                            \`
+                        }}
+                    />
+                </>
+            )
+        `}
+        </SyntaxHighlighter>
+
+2.  Em seguida vamos colocar esse script dentro da Head no arquivo \_document.jsx. Se a sua aplicacao nao tiver esse arquivo adicione ela na pasta pages e copie o conteudo a seguir:
+
+        <SyntaxHighlighter language="javascript">
+        {`
+            import { AnalyticsScripts } from '@/components/libs/analytics'
+            import { Html, Head, Main, NextScript } from 'next/document'
+
+            export default function Document() {
+                return (
+                    <Html lang="pt-br">
+                    <Head>
+                        // script do google analytics que criamos
+                        <AnalyticsScripts />
+                    </Head>
+                    <body>
+                        <Main />
+                        <NextScript />
+                    </body>
+                    </Html>
+                )
+            }
+        `}
+        </SyntaxHighlighter>
+
+3.  Precisamos inicializar o Analytics em nossas paginas durante o acesso do usuario. Por isso vamos criar um hook chamado useAnalytics no nosso arquivo analytics.js
+
+        <SyntaxHighlighter language="javascript">
+        {`
+            export const useAnalytics = () => {
+                const nextRouter = useRouter()
+
+                const handleRouteChange = useCallback((url: string) => {
+                    pageview(url)
+                }, [])
+
+                useEffect(() => {
+                    nextRouter.events.on('routeChangeComplete', handleRouteChange)
+                    return () => nextRouter.events.off('routeChangeComplete', handleRouteChange)
+                }, [handleRouteChange, nextRouter])
+            }
+        `}
+        </SyntaxHighlighter>
+
+4.  Agora eh so adicionar o nosso hook no arquivo \_app.jsx e pronto! Se a sua aplicacao nao tiver esse arquivo adicione ela na pasta pages e copie o conteudo a seguir:
+
+        <SyntaxHighlighter language="javascript">
+        {`
+            export default function App({ Component, pageProps }: AppProps) {
+                useAnalytics()
+                return (
+                    <>
+                        <Component {...pageProps} />
+                    </>
+                )
+            }
+        `}
+        </SyntaxHighlighter>
+
+## Conclusão
+
+Integrar o Google Analytics em seu site Next.js é simples. Basta seguir os passos descritos neste artigo, que incluem criar sua conta e configurar o Google Analytics, implementar o código de acompanhamento e inicializar o Google Analytics. Com essas etapas concluídas, você poderá acompanhar o desempenho do seu site e tomar decisões informadas sobre como melhorar a experiência do usuário e aumentar as conversões.

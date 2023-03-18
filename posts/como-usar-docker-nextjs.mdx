@@ -1,0 +1,133 @@
+---
+title: Como usar Docker com a sua aplicação em Next.js
+date: '2023-03-18T19:24:26.000Z'
+description: 'Aprenda como utilizar Docker com sua aplicação em Next.js e torne o seu workflow de desenvolvimento mais eficiente! Não perca mais tempo configurando ambientes complexos e foque no que realmente importa, desenvolver sua aplicação.'
+thumbnailUrl: /images/como-usar-docker-nextjs/docker-moby.png
+tags: ['code', 'tutorial']
+---
+
+Se você já trabalhou com desenvolvimento de aplicações web, provavelmente já deve ter ouvido falar do Docker. Ele é uma das ferramentas mais populares para criação de ambientes de desenvolvimento e produção, permitindo que você empacote suas aplicações em containers isolados, garantindo portabilidade e consistência.
+
+O Next.js é um framework para construção de aplicações web em React. Ele é muito popular devido à sua simplicidade e rapidez no desenvolvimento de aplicações web com renderização do lado do servidor (SSR). Neste artigo, vamos mostrar como usar Docker com a sua aplicação em Next.js.
+
+## Pré-requisitos
+
+-   Docker instalado na sua máquina
+-   Conhecimento básico em Docker e Next.js
+
+## Passo 1 - Criar o arquivo Dockerfile
+
+<SyntaxHighlighter language="Dockerfile">
+{`
+    # Dockerfile
+    FROM node:14
+
+    WORKDIR /app
+
+    COPY package*.json ./
+    RUN npm install
+    COPY . .
+
+    EXPOSE 3000
+
+    CMD [ "npm", "run", "dev" ]
+
+`}
+
+</SyntaxHighlighter>
+
+Aqui estamos criando uma imagem a partir da imagem oficial do Node.js, com a versão 14. Em seguida, criamos um diretório de trabalho (/app) e copiamos o arquivo package.json para instalarmos as dependências da nossa aplicação. Em seguida, copiamos todo o conteúdo da nossa aplicação para o diretório de trabalho.
+
+Em seguida, expomos a porta 3000, que é a porta padrão do Next.js, e definimos o comando padrão para executar a aplicação, usando o npm run dev.
+
+## Passo 2 - Criar um arquivo docker-compose.yml
+
+O docker-compose.yml é responsável por definir a configuração do seu ambiente Docker. Ele pode ser usado para definir várias configurações, como variáveis de ambiente, volumes, redes, etc. Neste exemplo, vamos usar apenas para definir a imagem da nossa aplicação.
+
+<SyntaxHighlighter language="yaml">
+{`
+    # docker-compose.yml
+    version: '3'
+    services:
+    app:
+        container_name: nextjs_app
+        build: .
+        ports:
+        - "3000:3000"
+
+`}
+
+</SyntaxHighlighter>
+
+Aqui estamos definindo a versão do docker-compose (3) e criando um serviço chamado "app". Definimos o nome do container como "nextjs_app". Em seguida, definimos o build do serviço, que usa o Dockerfile na raiz do nosso projeto. Por fim, definimos que a porta 3000 do container deve ser exposta na porta 3000 da nossa máquina host.
+
+## Passo 3 - Executar a aplicação com Docker
+
+Para executar a nossa aplicação com Docker, basta rodar o comando docker-compose up na raiz do nosso projeto. O Docker irá baixar as dependências e criar um container para nossa aplicação.
+
+<SyntaxHighlighter language="bash">
+{`
+    $ docker-compose up
+`}
+
+</SyntaxHighlighter>
+
+Se tudo der certo, você deverá ver a seguinte mensagem no terminal:
+
+<SyntaxHighlighter language="bash">
+{`
+    > nextjs@0.1.0 dev
+    > next dev
+
+    ready - started server on http://localhost:3000
+
+`}
+
+</SyntaxHighlighter>
+
+Isso significa que sua aplicação está sendo executada em um container Docker e pode ser acessada no endereço http://localhost:3000.
+
+## Passo 4 - Configurar para o ambiente de produção
+
+Configurar o Dockerfile para a produção é fundamental para garantir que sua aplicação Next.js possa ser executada de forma eficiente em um ambiente de produção. Para isso, é importante minimizar o tamanho final da imagem do Docker, removendo arquivos e dependências desnecessárias e otimizando a forma como a aplicação é construída.
+
+Uma boa prática é criar um Dockerfile específico para o ambiente de produção, separando-o do Dockerfile de desenvolvimento. No Dockerfile de produção, você pode utilizar a instrução FROM para obter uma imagem base mínima e adicionar apenas as dependências e arquivos necessários para executar sua aplicação. Você também pode utilizar a instrução COPY para adicionar os arquivos de sua aplicação para a imagem.
+
+Aqui está o exemplo fornecido na documentacao do Next.js de como criar um Dockerfile para produção em sua aplicação:
+
+<SyntaxHighlighter language="yaml">
+{`
+    # Dockerfile para ambiente de produção
+    FROM node:14-alpine
+
+    # Define o diretório de trabalho
+    WORKDIR /app
+
+    # Copia o arquivo package.json e instala as dependências
+    COPY package*.json ./
+    RUN npm ci --production
+
+    # Copia o código fonte da aplicação
+    COPY . .
+
+    # Compila a aplicação
+    RUN npm run build
+
+    # Define o comando para iniciar a aplicação
+    CMD ["npm", "start"]
+
+`}
+
+</SyntaxHighlighter>
+
+Este exemplo usa uma imagem base do Node.js, instala as dependências e copia o código fonte para a imagem. Em seguida, ele compila a aplicação com o comando npm run build e define o comando para iniciar a aplicação com o comando npm start. Ao construir essa imagem, você terá uma imagem otimizada para executar sua aplicação Next.js em um ambiente de produção.
+
+Lembre-se de que é importante manter seus Dockerfiles atualizados e revisá-los regularmente para garantir que sua aplicação esteja sendo executada de forma eficiente e segura em um ambiente de produção.
+
+## Separe a construção do ambiente de desenvolvimento da produção em sua aplicação Next.js com múltiplos stages no Docker.
+
+Uma das vantagens do uso do Docker com sua aplicação Next.js é a possibilidade de criar múltiplos stages para seu Dockerfile, o que pode ser muito útil para separar a construção do ambiente de desenvolvimento da produção ou para incluir testes automatizados. Em nosso post "Utilizando múltiplos stages com Docker: separando a construção do ambiente de desenvolvimento da produção em sua aplicação Next.js", você encontrará um guia completo sobre como separar a construção de seu Dockerfile em diferentes estágios e como otimizar o tamanho final da imagem. Não deixe de conferir!
+
+## Conclusão
+
+A utilização do Docker com a sua aplicação em Next.js pode trazer muitos benefícios, como portabilidade, consistência e facilidade na configuração do ambiente de desenvolvimento e produção. Os passos descritos neste artigo permitem que você crie facilmente um ambiente de desenvolvimento para sua aplicação Next.js utilizando o Docker. Esperamos que este tutorial seja útil e ajude a melhorar seu workflow de desenvolvimento.
