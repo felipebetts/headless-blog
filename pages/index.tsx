@@ -1,7 +1,5 @@
 import Carousel from '@/components/common/carousel/carousel'
 import CarouselItem from '@/components/common/carousel/carousel-item'
-import CarouselNextButton from '@/components/common/carousel/carousel-next-button'
-import CarouselPrevButton from '@/components/common/carousel/carousel-prev-button'
 import AnimatedPostHero from '@/components/home/animated-post-hero'
 import CarouselPostHero from '@/components/home/carousel-post-hero'
 import Head from '@/components/layout/head'
@@ -9,7 +7,6 @@ import PostCard from '@/components/post/post-card'
 import useTags from '@/hooks/use-tags'
 import { PostParams } from '@/utils/types'
 import { GetStaticProps } from 'next'
-import { useContext } from 'react'
 
 export interface StaticProps {
   posts: Array<PostParams>
