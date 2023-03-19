@@ -8,7 +8,7 @@ const CarouselPrevButton: React.FC = () => {
 
   return (
     <button
-      className="p-4 bg-opacity-50 border border-slate-700 bg-black mx-4 rounded-md hover:bg-opacity-90 transition-all duration-150"
+      className="p-4 shadow-xl mx-4 rounded-md bg-indigo-600 hover:bg-indigo-800 transition-all duration-150"
       onClick={scrollPrev}
     >
       <ChevronLeftIcon className='h-6 w-6' />
