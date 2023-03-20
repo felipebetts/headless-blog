@@ -1,7 +1,7 @@
 import React, { FormEvent, Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import classNames from '@/utils/classnames'
 import { navigation } from '@/utils/contants'
 import useTags from '@/hooks/use-tags'
@@ -43,27 +43,30 @@ const Navbar: React.FC = () => {
               </div>
               <div className="flex flex-1 h-16 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                <Link href='/'>
+                <NextLink className='text-slate-500 dark:text-slate-200 hover:text-indigo-700 text-xl font-semibold h-16 flex justify-center items-center' href='/'>
                     <Image
-                      className="block h-8 w-auto lg:hidden"
+                      className="block lg:hidden h-8 w-auto"
                       width={64}
                       height={48}
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                       alt="Your Company"
                     />
-                    <Image
-                      width={64}
-                      height={48}
-                      className="hidden h-8 w-auto lg:block"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                      alt="Your Company"
-                      />
-                </Link>
+                    <div className="hidden lg:flex items-center">
+                      <Image
+                        width={64}
+                        height={48}
+                        className="h-8 w-auto mr-4"
+                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                        alt="Your Company"
+                        />
+                        Home
+                    </div>
+                </NextLink>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4 my-auto">
                     {navigationTags && navigationTags.map((item) => (
-                      <Link
+                      <NextLink
                         key={item.name}
                         href={item.href}
                         className={classNames(
@@ -73,7 +76,7 @@ const Navbar: React.FC = () => {
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
-                      </Link>
+                      </NextLink>
                     ))}
                   </div>
                 </div>
@@ -136,7 +139,7 @@ const Navbar: React.FC = () => {
                 {navigationTags && navigationTags.map((item) => (
                   <Disclosure.Button
                     key={item.name}
-                    as={Link}
+                    as={NextLink}
                     href={item.href}
                     className={classNames(
                       item.current ? ' text-black border-l-2 border-l-indigo-500' : 'text-slate-400 hover:text-black',
