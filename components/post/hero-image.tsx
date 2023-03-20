@@ -9,7 +9,7 @@ interface Props {
 const HeroImage: React.FC<Props> = ({ src, alt }) => {
   return (
     <div
-      className='relative h-72 lg:h-[70vh]'    
+      className='relative h-72 lg:h-[70vh] bg-black/30'    
     >
       <Image 
         src={src}
