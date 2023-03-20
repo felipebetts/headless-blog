@@ -2,7 +2,7 @@
 title: Como usar Docker com a sua aplicação em Next.js
 date: '2023-03-18T19:24:26.000Z'
 description: 'Aprenda como utilizar Docker com sua aplicação em Next.js e torne o seu workflow de desenvolvimento mais eficiente! Não perca mais tempo configurando ambientes complexos e foque no que realmente importa, desenvolver sua aplicação.'
-thumbnailUrl: /images/como-usar-docker-nextjs/docker-moby.png
+thumbnailUrl: /images/posts/como-usar-docker-nextjs/docker-moby.png
 tags: ['code', 'tutorial']
 ---
 
@@ -98,23 +98,65 @@ Aqui está o exemplo fornecido na documentacao do Next.js de como criar um Docke
 <SyntaxHighlighter language="yaml">
 {`
     # Dockerfile para ambiente de produção
-    FROM node:14-alpine
+    FROM node:18-alpine AS base
 
-    # Define o diretório de trabalho
+    # Install dependencies only when needed
+    FROM base AS deps
+    # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+    RUN apk add --no-cache libc6-compat
     WORKDIR /app
 
-    # Copia o arquivo package.json e instala as dependências
-    COPY package*.json ./
-    RUN npm ci --production
+    # Install dependencies based on the preferred package manager
+    COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+    RUN \
+    if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+    elif [ -f package-lock.json ]; then npm ci; \
+    elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
+    else echo "Lockfile not found." && exit 1; \
+    fi
 
-    # Copia o código fonte da aplicação
+
+    # Rebuild the source code only when needed
+    FROM base AS builder
+    WORKDIR /app
+    COPY --from=deps /app/node_modules ./node_modules
     COPY . .
 
-    # Compila a aplicação
-    RUN npm run build
+    # Next.js collects completely anonymous telemetry data about general usage.
+    # Learn more here: https://nextjs.org/telemetry
+    # Uncomment the following line in case you want to disable telemetry during the build.
+    # ENV NEXT_TELEMETRY_DISABLED 1
 
-    # Define o comando para iniciar a aplicação
-    CMD ["npm", "start"]
+    RUN yarn build
+
+    # If using npm comment out above and use below instead
+    # RUN npm run build
+
+    # Production image, copy all the files and run next
+    FROM base AS runner
+    WORKDIR /app
+
+    ENV NODE_ENV production
+    # Uncomment the following line in case you want to disable telemetry during runtime.
+    # ENV NEXT_TELEMETRY_DISABLED 1
+
+    RUN addgroup --system --gid 1001 nodejs
+    RUN adduser --system --uid 1001 nextjs
+
+    COPY --from=builder /app/public ./public
+
+    # Automatically leverage output traces to reduce image size
+    # https://nextjs.org/docs/advanced-features/output-file-tracing
+    COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+    COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+    USER nextjs
+
+    EXPOSE 3000
+
+    ENV PORT 3000
+
+    CMD ["node", "server.js"]
 
 `}
 
@@ -126,7 +168,10 @@ Lembre-se de que é importante manter seus Dockerfiles atualizados e revisá-los
 
 ## Separe a construção do ambiente de desenvolvimento da produção em sua aplicação Next.js com múltiplos stages no Docker.
 
-Uma das vantagens do uso do Docker com sua aplicação Next.js é a possibilidade de criar múltiplos stages para seu Dockerfile, o que pode ser muito útil para separar a construção do ambiente de desenvolvimento da produção ou para incluir testes automatizados. Em nosso post "Utilizando múltiplos stages com Docker: separando a construção do ambiente de desenvolvimento da produção em sua aplicação Next.js", você encontrará um guia completo sobre como separar a construção de seu Dockerfile em diferentes estágios e como otimizar o tamanho final da imagem. Não deixe de conferir!
+Uma das vantagens do uso do Docker com sua aplicação Next.js é a possibilidade de criar múltiplos stages para seu Dockerfile, o que pode ser muito útil para separar a construção do ambiente de desenvolvimento da produção ou para incluir testes automatizados.
+No post <Link href='/posts/separando-ambientes-docker'>Utilizando múltiplos stages com Docker: separando a construção do ambiente de desenvolvimento da produção em sua aplicação Next.js</Link>
+", você encontrará um guia completo sobre como separar a construção de seu Dockerfile
+em diferentes estágios e como otimizar o tamanho final da imagem. Não deixe de conferir!
 
 ## Conclusão
 

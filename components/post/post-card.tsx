@@ -1,8 +1,10 @@
 import React from 'react'
-import Link from '../common/link'
+import {TagLink} from '../common/link'
 import NextLink from 'next/link'
 import { formatDate } from '@/utils/format'
 import Image from 'next/image'
+import classNames from '@/utils/classnames'
+import s from '@/styles/post-card.module.css'
 
 interface Props {
     date: string
@@ -28,7 +30,7 @@ const PostCard: React.FC<Props> = ({
                 style={{ backgroundImage: `url('${thumbnailUrl}')`}}
                 className={`bg-cover bg-center h-72`}
             /> */}
-            <div className="h-72 w-full relative overflow-hidden">
+            <div className={classNames("h-72 w-full relative overflow-hidden rounded-md hover:shadow-xl transition-shadow duration-300", s.thumbnail_container)}>
                 <Image 
                     src={thumbnailUrl}
                     alt='slug'
@@ -42,15 +44,15 @@ const PostCard: React.FC<Props> = ({
                 <>
                     {tags.map((tag, i) => i === tags.length - 1 ? (
                         <div className='pr-2' key={`${slug}_${tag}`}>
-                            <Link href={`/categorias/${tag}`} px={0}>
+                            <TagLink href={`/categorias/${tag}`} px={0}>
                                 { tag }
-                            </Link>
+                            </TagLink>
                         </div>
                     ) : (
                         <div className='pr-2' key={`${slug}_${tag}`}>
-                            <Link href={`/categorias/${tag}`} px={0}>
+                            <TagLink href={`/categorias/${tag}`} px={0}>
                                 { tag }
-                            </Link>
+                            </TagLink>
                         </div>
                     ))}
                     <span className='pr-2'> • </span>

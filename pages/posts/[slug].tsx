@@ -9,12 +9,12 @@ import Head from '@/components/layout/head'
 import HeroImage from '@/components/post/hero-image'
 import styles from '@/styles/post.module.css'
 import LabeledImage from '@/components/post/labeled-image'
-import Link from '@/components/common/link'
 import YoutubePlayer from '@/components/libs/youtube-player'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { AdSenseScript, AdSenseUnit, AdSenseUnitScript } from '@/components/libs/google-adsense'
 import useTags from '@/hooks/use-tags'
 import { formatDate } from '@/utils/format'
+import Link, { TagLink } from '@/components/common/link'
 
 interface Props {
   slug: string
@@ -23,7 +23,7 @@ interface Props {
   tags?: string[]
 }
 
-const components = { SyntaxHighlighter, LabeledImage, YoutubePlayer }
+const components = { SyntaxHighlighter, LabeledImage, YoutubePlayer, Link }
 
 const Post: React.FC<Props> = ({ slug, content, minutesToRead, tags }) => {
 
@@ -44,9 +44,9 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead, tags }) => {
           <article className="w-full flex-1 lg:pr-4 pb-6">
             <div className="w-full flex items-center py-2 mt-6 text-sm">
               {frontmatter?.tags && frontmatter.tags.map((tag: string) => (
-                <Link href={`/categorias/${tag}`} key={tag}>
+                <TagLink href={`/categorias/${tag}`} key={tag}>
                   {tag}
-                </Link>
+                </TagLink>
               ))}
               <span className='pr-2'> • </span>
               {minutesToRead && (

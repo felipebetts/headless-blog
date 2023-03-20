@@ -44,3 +44,10 @@
     list-style-type: decimal;
     padding-left: 2rem;
 }
+
+.postContent li {
+    font-size: 1.25rem;
+    line-height: 1.8rem;
+    font-weight: 500;
+    padding: 1rem 0;
+}
