@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from '../common/link'
+import {TagLink} from '../common/link'
 import NextLink from 'next/link'
 import { formatDate } from '@/utils/format'
 import Image from 'next/image'
@@ -44,15 +44,15 @@ const PostCard: React.FC<Props> = ({
                 <>
                     {tags.map((tag, i) => i === tags.length - 1 ? (
                         <div className='pr-2' key={`${slug}_${tag}`}>
-                            <Link href={`/categorias/${tag}`} px={0}>
+                            <TagLink href={`/categorias/${tag}`} px={0}>
                                 { tag }
-                            </Link>
+                            </TagLink>
                         </div>
                     ) : (
                         <div className='pr-2' key={`${slug}_${tag}`}>
-                            <Link href={`/categorias/${tag}`} px={0}>
+                            <TagLink href={`/categorias/${tag}`} px={0}>
                                 { tag }
-                            </Link>
+                            </TagLink>
                         </div>
                     ))}
                     <span className='pr-2'> • </span>

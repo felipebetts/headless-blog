@@ -1,22 +1,37 @@
 import React from 'react'
 import NextLink from 'next/link'
 
+import classNames from '@/utils/classnames'
+
 
 interface Props {
     children: React.ReactNode
     href: string
-    px?: number
+    className?: string
 }
 
-const Link: React.FC<Props> = ({ children, href, px = 3 }) => {
+const Link: React.FC<Props> = ({ children, href, className }) => {
   return (
     <NextLink
       href={href}
-      className={`px-${px} py-2 text-sm font-medium text-indigo-500 hover:text-indigo-700`}
+      className={classNames(`font-medium text-indigo-500 hover:text-indigo-700`, className ? className : '')}
     >
         { children }
     </NextLink>
   )
 }
+
+
+interface TagProps {
+  children: React.ReactNode
+  href: string
+  px?: number,
+}
+
+export const TagLink: React.FC<TagProps> = ({ px = 3, href, children }) => (
+  <Link href={href} className={`px-${px} py-2 text-sm`}>
+    { children }
+  </Link>
+)
 
 export default Link
