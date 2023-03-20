@@ -21,6 +21,16 @@ const Link: React.FC<Props> = ({ children, href, className }) => {
   )
 }
 
+interface OutProps {
+  children: React.ReactNode
+  href: string
+}
+
+export const OutLink: React.FC<OutProps> = ({ href, children }) => (
+  <a target='_blank' rel='noreferrer' href={href}>
+    {children}
+  </a>
+)
 
 interface TagProps {
   children: React.ReactNode
