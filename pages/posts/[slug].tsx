@@ -39,9 +39,9 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead, tags }) => {
         <AdSenseUnitScript />
       </Head>
       <HeroImage src={frontmatter.thumbnailUrl} alt={`${slug}_hero_img`} />
-      <main className={`mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 ${styles.postContent}`}>
-        <div className="w-full flex flex-col lg:flex-row">
-          <article className="w-full flex-1 lg:pr-4 pb-6">
+      <main className={`mx-auto max-w-6xl px-2 sm:px-6 xl:px-8 ${styles.postContent}`}>
+        <div className="w-full xl:w-[calc(100%-16rem)] flex flex-col xl:flex-row">
+          <article className="w-full xl:pr-4 pb-6">
             <div className="w-full flex items-center py-2 mt-6 text-sm">
               {frontmatter?.tags && frontmatter.tags.map((tag: string) => (
                 <TagLink href={`/categorias/${tag}`} key={tag}>
@@ -77,7 +77,7 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead, tags }) => {
             </div>
             <MDXRemote {...content} components={components} />
           </article>
-          <aside className='lg:shrink-0 w-full lg:w-64 p-2 relative'>
+          <aside className='w-full p-2 relative flex justify-center'>
             <div className="w-full h-full max-h-[90vh] min-h-[240px] rounded-md sticky top-20 z-0 text-white text-4xl text-center">
               AD
             <AdSenseUnit />
