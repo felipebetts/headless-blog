@@ -26,11 +26,7 @@ const PostCard: React.FC<Props> = ({
   return (
     <div className="w-full h-full">
         <NextLink href={`/posts/${slug}`}>
-            {/* <div
-                style={{ backgroundImage: `url('${thumbnailUrl}')`}}
-                className={`bg-cover bg-center h-72`}
-            /> */}
-            <div className={classNames("h-72 w-full relative overflow-hidden rounded-md hover:shadow-xl transition-shadow duration-300", s.thumbnail_container)}>
+            <div className={classNames("h-72 w-full relative overflow-hidden rounded-md bg-black/30 hover:shadow-xl transition-shadow duration-300", s.thumbnail_container)}>
                 <Image 
                     src={thumbnailUrl}
                     alt='slug'

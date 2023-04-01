@@ -10,7 +10,7 @@ interface Props {
 const CarouselPostHero: React.FC<Props> = ({ post }) => {
   return (
     <NextLink href={`posts/${post.slug}`}>
-      <div className="w-full h-full overflow-hidden relative">
+      <div className="w-full h-full overflow-hidden relative bg-black/30">
         <Image
           src={post.frontmatter.thumbnailUrl}
           alt={post.slug}

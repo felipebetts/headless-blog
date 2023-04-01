@@ -12,7 +12,7 @@ interface Props {
 const AnimatedPostHero: React.FC<Props> = ({ post }) => {
   return (
     <NextLink href={`posts/${post.slug}`}>
-      <div className={classNames("w-full h-full overflow-hidden relative", s.container)}>
+      <div className={classNames("w-full h-full overflow-hidden relative bg-black/30", s.container)}>
         <Image
           src={post.frontmatter.thumbnailUrl}
           alt={post.slug}
