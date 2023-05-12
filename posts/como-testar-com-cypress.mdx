@@ -6,11 +6,11 @@ thumbnailUrl: /images/posts/como-testar-com-cypress/thumbnail.png
 tags: ['code', 'tutorial']
 ---
 
-Se você é desenvolvedor frontend, já deve ter passado por momentos de estresse ao tentar garantir que todas as funcionalidades do seu aplicativo web funcionem corretamente. Felizmente, existem ferramentas que podem ajudar a facilitar esse processo. Neste tutorial, vamos aprender como usar o Cypress para testar o seu frontend.
+Se você é desenvolvedor frontend, já deve ter passado por momentos de estresse ao tentar garantir que todas as funcionalidades do seu aplicativo web funcionem corretamente. Felizmente, existem ferramentas que podem ajudar a facilitar esse processo. Neste tutorial, vamos aprender como usar o Cypress para criar e executar testes End-to-End no seu frontend.
 
 ## O que é o Cypress?
 
-O Cypress é uma ferramenta de teste end-to-end para aplicativos web. Ele permite testar as funcionalidades do seu aplicativo como um usuário real, interagindo com a interface gráfica e simulando eventos, como cliques e digitação. Além disso, o Cypress é fácil de usar e configurar, permitindo que você escreva testes em JavaScript com uma sintaxe clara e concisa.
+O Cypress é uma ferramenta de teste End-to-End para aplicativos web. Ele permite testar as funcionalidades do seu aplicativo como um usuário real, interagindo com a interface gráfica e simulando eventos, como cliques e digitação. Além disso, o Cypress é fácil de usar e configurar, permitindo que você escreva testes em JavaScript com uma sintaxe clara e concisa.
 
 ## Configurando o Cypress
 
@@ -19,22 +19,49 @@ Antes de começar a escrever testes, você precisa instalar e configurar o Cypre
 1. Instale o Cypress via npm usando o seguinte comando no terminal:
 
 <SyntaxHighlighter language="bash">
-    {`  npm install cypress --save-dev`}
+    {`  
+    npm install cypress --save-dev
+    // or
+    yarn add -D cypress
+    `}
 </SyntaxHighlighter>
 
 2. Depois de instalado, abra o Cypress executando o seguinte comando no terminal:
 
-<SyntaxHighlighter language="bash">{`  npx cypress open`}</SyntaxHighlighter>
+<SyntaxHighlighter language="bash">{`npx cypress open`}</SyntaxHighlighter>
 
-3. O Cypress será aberto em uma nova janela. Selecione a pasta cypress/integration e delete os exemplos de teste que vêm por padrão.
+3. O Cypress será aberto em uma nova janela. Selecione a opcao E2E Testing para criar as configurações na raiz do seu projeto.
+
+4. Adicione a url do servidor da nossa aplicação no arquivo cypress.config.js:
+
+<SyntaxHighlighter language="javascript">
+{`
+    const { defineConfig } = require("cypress");
+
+    export default defineConfig({
+        e2e: {
+            // aqui inserimos a url da nossa aplicação que queremos testar
+            baseUrl: 'http://localhost:3000',
+            setupNodeEvents(on, config) {
+                // implemente node event listeners aqui
+            },
+            specPattern: '**/*.cy.js'
+        }
+    })
+
+`}
+
+</SyntaxHighlighter>
+
+Por padrão os arquivos de teste cypress terminam em `.cy.js`, mas podemos alterar isso alterando o valor de specPattern.
 
 ## Escrevendo testes com o Cypress
 
-Agora que você já tem o Cypress instalado e configurado, podemos começar a escrever nossos testes. Para escrever testes, primeiro você precisa criar um arquivo de teste. Os arquivos de teste no Cypress têm a extensão .spec.js e ficam no diretório cypress/integration.
+Agora que você já tem o Cypress instalado e configurado, podemos começar a escrever nossos testes. Para escrever testes, primeiro você precisa criar um arquivo de teste. Os arquivos de teste no Cypress têm a extensão .cy.js e ficam no diretório cypress/e2e.
 
 ### Criando um teste
 
-Vamos começar criando um teste básico para verificar se a página inicial da sua aplicação está sendo exibida corretamente. Crie um arquivo chamado homePage.spec.js e adicione o seguinte código:
+Vamos começar criando um teste básico para verificar se a página inicial da sua aplicação está sendo exibida corretamente. Crie um arquivo chamado homePage.cy.js e adicione o seguinte código:
 
 <SyntaxHighlighter language="javascript">
     {`
@@ -53,11 +80,9 @@ Neste teste, estamos usando a função describe para descrever o que estamos tes
 
 Para rodar os testes, abra o terminal e digite o seguinte comando:
 
-<SyntaxHighlighter language="bash">
-    {`  npm run cypress:open`}
-</SyntaxHighlighter>
+<SyntaxHighlighter language="bash">{`  npx cypress open`}</SyntaxHighlighter>
 
-Isso abrirá a interface do Cypress, onde você pode selecionar o arquivo de teste que deseja executar. Clique no arquivo homePage.spec.js e aguarde enquanto o Cypress executa o teste.
+Isso abrirá a interface do Cypress, onde você pode selecionar o arquivo de teste que deseja executar. Clique no arquivo homePage.cy.js e aguarde enquanto o Cypress executa o teste.
 
 ### Escrevendo testes mais avançados
 
@@ -81,6 +106,8 @@ Além de testar a exibição de elementos na página, o Cypress também permite 
 Neste exemplo, estamos navegando até a página de contato da aplicação, preenchendo o formulário e verificando se a mensagem de sucesso é exibida corretamente.
 
 ## Conclusão
+
+Pronto! Agora você pode adicionar novas features ou refatorar código legado com segurança e tranquilidade de que nada está sendo quebrado no processo.
 
 O Cypress é uma ferramenta poderosa e fácil de usar para testar o frontend da sua aplicação. Com ele, é possível testar desde a exibição de elementos na página até a interação do usuário com a interface.
 
