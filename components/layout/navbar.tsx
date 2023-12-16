@@ -43,8 +43,8 @@ const Navbar: React.FC = () => {
               </div>
               <div className="flex flex-1 h-16 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                <NextLink className='text-slate-500 dark:text-slate-200 hover:text-indigo-700 text-xl font-semibold h-16 flex justify-center items-center' href='/'>
-                    <Image
+                <NextLink className='text-slate-500 dark:text-slate-200 hover:text-indigo-700 dark:hover:text-indigo-500 text-xl font-semibold h-16 flex justify-center items-center' href='/'>
+                    {/* <Image
                       className="block lg:hidden h-8 w-auto"
                       width={64}
                       height={48}
@@ -59,8 +59,8 @@ const Navbar: React.FC = () => {
                         src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                         alt="Your Company"
                         />
-                        Home
-                    </div>
+                    </div> */}
+                    Blog
                 </NextLink>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
