@@ -9,6 +9,12 @@ const nextConfig = {
         hostname: 'tailwindui.com',
         port: '',
         pathname: '**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+        port: '',
+        pathname: '**'
       }
     ]
   }

@@ -15,6 +15,8 @@ import { AdSenseScript, AdSenseUnit, AdSenseUnitScript } from '@/components/libs
 import useTags from '@/hooks/use-tags'
 import { formatDate } from '@/utils/format'
 import Link, { TagLink } from '@/components/common/link'
+import Image from 'next/image'
+import NextLink from 'next/link'
 
 interface Props {
   slug: string
@@ -29,6 +31,7 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead, tags }) => {
 
   const { frontmatter } = content
   useTags(tags)
+  console.log(frontmatter)
 
   return (
     <>
@@ -39,7 +42,7 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead, tags }) => {
         <AdSenseUnitScript />
       </Head>
       <HeroImage src={frontmatter.thumbnailUrl} alt={`${slug}_hero_img`} />
-      <main className={`mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 ${styles.postContent}`}>
+      <main className={`mx-auto max-w-6xl px-2 sm:px-6 lg:px-8`}>
         <div className="w-full flex flex-col lg:flex-row">
           <article className="w-full flex-1 lg:pr-4 pb-6">
             <div className="w-full flex items-center py-2 mt-6 text-sm">
@@ -66,16 +69,22 @@ const Post: React.FC<Props> = ({ slug, content, minutesToRead, tags }) => {
               >
                 {frontmatter.title}
               </h1>
-              <div
-                className='text-slate-500 dark:text-slate-300 text-sm pt-4'
-              >
-                {formatDate(frontmatter.date)}
+              <div className='flex items-center gap-2 mt-6 text-lg'>
+                <Image src={`https://github.com/${frontmatter.author}.png`} height={36} width={36} className='rounded-full' alt={frontmatter.author} />
+                <div>
+                  <a className='text-slate-500 dark:text-slate-200 hover:text-indigo-700 dark:hover:text-indigo-500 font-semibold' href={`https://github.com/${frontmatter.author}`} target="_blank" rel="noopener noreferrer">{frontmatter.author}</a>
+                  <p className='text-slate-500 dark:text-slate-300 text-sm'>
+                    {formatDate(frontmatter.date)}
+                  </p>
+                </div>
               </div>
             </div>
             <div className='text-2xl py-6 mb-6 font-medium'>
               {frontmatter.description}
             </div>
-            <MDXRemote {...content} components={components} />
+            <div className={`${styles.postContent}`}>
+              <MDXRemote {...content} components={components} />
+            </div>
           </article>
           <aside className='lg:shrink-0 w-full lg:w-64 p-2 relative'>
             <div className="w-full h-full max-h-[90vh] min-h-[240px] rounded-md sticky top-20 z-0 text-white text-4xl text-center">
