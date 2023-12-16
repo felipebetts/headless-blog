@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import fs from 'fs'
 import path from 'path'
-import matter from 'gray-matter'
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import PostCard from '@/components/post/post-card'
 import Pill from '@/components/common/pill'
 import useTags from '@/hooks/use-tags'
@@ -67,6 +66,7 @@ const Category: React.FC<StaticProps> = ({ category, posts, tags }) => {
 export default Category
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const matter = require('gray-matter')
   const files = fs.readdirSync(path.join('posts'))
   const tags: Array<string> = []
   files.forEach((filename: string, i: number) => {
@@ -80,7 +80,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     })
   
   })
-  // console.log('tags:', tags)
 
   const paths = tags.map(tag => ({
     params: {
@@ -95,6 +94,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const matter = require('gray-matter')
   const files = fs.readdirSync(path.join('posts'))
   const tags: Array<string> = []
   const posts = files
